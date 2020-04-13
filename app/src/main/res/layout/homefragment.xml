@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#F1F1F1"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/confirmedHeading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="CONFIRMED"
+            android:textColor="#99FF073A"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activeHeading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="ACTIVE"
+            android:textColor="#99007BFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recoveredHeading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="RECOVERED"
+            android:textColor="#9928A745"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/deceasedHeading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="DECEASED"
+            android:textColor="#996C757D"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/headerLayout"
+        android:background="#FFFFFF">
+
+    </View>
+
+    <LinearLayout
+        android:id="@+id/infoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view1"
+        android:background="#F1F1F1"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/confirmedCase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#99FF073A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activeCase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#99007BFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recoveredCase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#9928A745"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/deceasedCase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#996C757D"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/infoLayout"
+        android:background="#FFFFFF">
+
+    </View>
+
+    <LinearLayout
+        android:id="@+id/updateTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view2"
+        android:background="#F1F1F1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lastUpdatedime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textColor="#9928A745"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/refreshBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/refresh"
+        app:backgroundTint="#FFFFFF"
+        app:fabSize="mini"
+        app:rippleColor="#F1F1F1">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/updateTimeLayout"
+        android:background="#FFFFFF">
+
+    </View>
+
+    <LinearLayout
+        android:id="@+id/header_Recycler_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view3"
+        android:background="#F1F1F1"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="6">
+
+        <TextView
+            android:id="@+id/statesName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/lato"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="STATE/UT"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/confirmedHeading_Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="C"
+            android:textColor="#99FF073A"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activeHeading_Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="#99007BFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recoveredHeading_Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="R"
+            android:textColor="#9928A745"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/deceasedHeading__Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="D"
+            android:textColor="#996C757D"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/header_Recycler_Layout"
+        android:background="#FFFFFF">
+
+    </View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view4"
+        android:scrollbars="none">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/statesList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

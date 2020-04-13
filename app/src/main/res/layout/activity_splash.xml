@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashActivity">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="201dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icon"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="COVID-19"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:id="@+id/subTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="An Undeclared World War III"
+        android:textColor="#000000"
+        android:textSize="17sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/slogan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="21dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="#STAY HOME  #STAY JHAKKAS"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+</RelativeLayout>

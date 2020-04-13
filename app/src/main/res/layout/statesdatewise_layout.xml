@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header_Recycler_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F1F1F1"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/dateChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/lato"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:scrollbars="horizontal"
+            android:text="DATE"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/confirmedCaseChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="C"
+            android:textColor="#99FF073A"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recoveredCaseChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="R"
+            android:textColor="#9928A745"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/deceasedCaseChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="D"
+            android:textColor="#996C757D"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/header_Recycler_Layout"
+        android:background="#FFFFFF">
+
+    </View>
+
+</RelativeLayout>
