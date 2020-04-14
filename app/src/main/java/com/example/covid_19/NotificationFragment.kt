@@ -20,12 +20,13 @@ import kotlinx.android.synthetic.main.notificationfragment.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotificationFragment(mainActivity: MainActivity) : Fragment()
 {
     val activity = mainActivity
     val arrayList = arrayListOf<CasesTimeSeriesItem>()
-
     val arrayListTotal = arrayListOf<StatewiseItem>()
 
     override fun onCreateView(
@@ -88,6 +89,8 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
                     arrayListTotal.addAll(response.statewise)
                     arrayList.addAll(response.casesTimeSeries)
 
+                    sortArrayList()
+
                     prepareAdapter()
 
                     // Set Today's Values..
@@ -109,5 +112,15 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
         stateDayWiseList.setHasFixedSize(true)
         stateDayWiseList.adapter = statesListAdapter
         statesListAdapter.refreshList(arrayList)
+    }
+
+    private fun sortArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+            var dateFormat = SimpleDateFormat("dd MMMM")
+            var date1 = dateFormat.parse(o1.date)
+            var date2 = dateFormat.parse(o2.date)
+            return@Comparator date2.compareTo(date1)
+        })
     }
 }
