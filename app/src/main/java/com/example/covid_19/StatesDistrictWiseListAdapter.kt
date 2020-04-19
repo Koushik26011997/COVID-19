@@ -3,51 +3,58 @@ package com.example.covid_19
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid_19.states_Apis.CasesTimeSeriesItem
 import org.json.JSONArray
-import org.json.JSONObject
 
-class StatesDistrictWiseListAdapter(arrAyListState : ArrayList<String>, arrAyListDistrict : ArrayList<JSONArray>) : RecyclerView.Adapter<StatesDistrictWiseListAdapter.MyViewHolder>()
-{
+class StatesDistrictWiseListAdapter(
+    arrAyListState: ArrayList<String>,
+    arrAyListDistrict: ArrayList<JSONArray>
+) : RecyclerView.Adapter<StatesDistrictWiseListAdapter.MyViewHolder>() {
     var mArrAyListDistrict = arrAyListDistrict
     var mArrAyListState = arrAyListState
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MyViewHolder
-    {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_district_adapter, parent, false)
+    ): MyViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.layout_district_adapter, parent, false)
         return MyViewHolder(view)
     }
 
-    override fun getItemCount(): Int
-    {
-       return 32
+    override fun getItemCount(): Int {
+        return mArrAyListState.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int)
-    {
-//        for (i in 0 until mArrAyListDistrict.size)
-//        {
-//            //holder.districtName.text = mArrAyListDistrict.get(position).getJSONObject(i).getString("district")
-//            holder.confirmedDistrictCase.text = mArrAyListDistrict.get(position).getJSONObject(i).getString("confirmed")
-//        }
-        for (i in 0 until mArrAyListDistrict.size) {
-            holder.statesName.text = mArrAyListState.get(position)
-            holder.districtName.text =
-                mArrAyListDistrict.get(position).getJSONObject(i).getString("district")
-            holder.confirmedDistrictCase.text =
-                mArrAyListDistrict.get(position).getJSONObject(i).getString("confirmed")
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        var isClicked = false
+        holder.handleBtn.setOnClickListener() {
+            if (isClicked) {
+                holder.handleBtn.setImageResource(R.drawable.ic_remove_circle_outline_black_24dp)
+                holder.listing.visibility = View.GONE
+                holder.headingLayout.visibility = View.GONE
+                isClicked = false
+            } else {
+                holder.handleBtn.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
+                holder.listing.visibility = View.VISIBLE
+                holder.headingLayout.visibility = View.VISIBLE
+                isClicked = true
+            }
+        }
+        holder.statesName.text = mArrAyListState.get(position)
+        holder.listing.apply {
+            setHasFixedSize(true)
+            adapter = StatesSubDistWiseListAdapter(mArrAyListDistrict.get(position))
         }
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
-        var confirmedDistrictCase : TextView = itemView.findViewById(R.id.confirmedDistrictCase)
-        var statesName : TextView = itemView.findViewById(R.id.statesName)
-        var districtName : TextView = itemView.findViewById(R.id.districtName)
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var statesName: TextView = itemView.findViewById(R.id.stateName)
+        var listing: RecyclerView = itemView.findViewById(R.id.districtStateList)
+        var handleBtn: ImageView = itemView.findViewById(R.id.handleBtn)
+        var headingLayout : LinearLayout = itemView.findViewById(R.id.headingLayout)
     }
 }

@@ -12,6 +12,11 @@
         android:title="@string/title_dashboard" />
 
     <item
+        android:id="@+id/navigation_district"
+        android:icon="@drawable/ic_casino_black_24dp"
+        android:title="@string/title_district" />
+
+    <item
         android:id="@+id/navigation_notification"
         android:icon="@drawable/ic_graphic_eq_black_24dp"
         android:title="@string/title_transfer" />

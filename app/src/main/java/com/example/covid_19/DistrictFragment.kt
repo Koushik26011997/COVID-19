@@ -2,7 +2,6 @@ package com.example.covid_19
 
 import NetworkMonitor
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -14,11 +13,10 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONArrayRequestListener
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.aboutfragment.*
 import kotlinx.android.synthetic.main.layout_bony.*
 import org.json.JSONArray
 
-class AboutFragment(mainActivity: MainActivity) : Fragment()
+class DistrictFragment(mainActivity: MainActivity) : Fragment()
 {
     val activity = mainActivity
 
@@ -31,7 +29,7 @@ class AboutFragment(mainActivity: MainActivity) : Fragment()
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.aboutfragment, container, false)
+        return inflater.inflate(R.layout.layout_bony, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
@@ -43,18 +41,8 @@ class AboutFragment(mainActivity: MainActivity) : Fragment()
                     startActivityForResult(Intent(Settings.ACTION_SETTINGS), 0)
                 }).show()
         }
-        info.setOnRippleCompleteListener {
-            try {
-                var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegra.ph/Covid-19-Sources-03-19"))
-                startActivity(Intent.createChooser(intent, "Opens With"))
-            }
-            catch (exp : Exception)
-            {
-                Snackbar.make(view, "Could not open the web browser!", Snackbar.LENGTH_SHORT).setAction("SETTINGS", View.OnClickListener {
-                    startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
-                }).show()
-            }
-        }
+
+       getCurrenData()
     }
 
     private fun getCurrenData()

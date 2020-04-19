@@ -39,6 +39,13 @@ class MainActivity : AppCompatActivity()
                 return@setOnNavigationItemSelectedListener true
             }
 
+            R.id.navigation_district->
+            {
+                isDoubleBackPressed = false
+                loadFragment(DistrictFragment(this))
+                return@setOnNavigationItemSelectedListener true
+            }
+
             R.id.navigation_notification->
             {
                 isDoubleBackPressed = false

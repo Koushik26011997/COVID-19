@@ -25,6 +25,11 @@ import java.util.*
 
 class NotificationFragment(mainActivity: MainActivity) : Fragment()
 {
+    var isSorted = false
+    var isConfirmSorted = false
+    var isRecoverSorted = false
+    var isDeathSorted = false
+
     val activity = mainActivity
     val arrayList = arrayListOf<CasesTimeSeriesItem>()
     val arrayListTotal = arrayListOf<StatewiseItem>()
@@ -56,6 +61,62 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
         else
         {
             getCurrenData()
+        }
+
+        dateChange.setOnClickListener(){
+            if (isSorted)
+            {
+                sortdescArrayList()
+                isSorted = false
+            }
+            else
+            {
+                sortascArrayList()
+                isSorted = true
+            }
+            prepareAdapter()
+        }
+
+        confirmedCaseChange.setOnClickListener(){
+            if (isConfirmSorted)
+            {
+                sortdescConfirmArrayList()
+                isConfirmSorted = false
+            }
+            else
+            {
+                sortascConfirmArrayList()
+                isConfirmSorted = true
+            }
+            prepareAdapter()
+        }
+
+        recoveredCaseChange.setOnClickListener(){
+            if (isRecoverSorted)
+            {
+                sortdescRecoverArrayList()
+                isRecoverSorted = false
+            }
+            else
+            {
+                sortascRecoverArrayList()
+                isRecoverSorted = true
+            }
+            prepareAdapter()
+        }
+
+        deceasedCaseChange.setOnClickListener(){
+            if (isDeathSorted)
+            {
+                sortdescDeathArrayList()
+                isDeathSorted = false
+            }
+            else
+            {
+                sortascDeathArrayList()
+                isDeathSorted = true
+            }
+            prepareAdapter()
         }
     }
 
@@ -89,8 +150,7 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
                     arrayListTotal.addAll(response.statewise)
                     arrayList.addAll(response.casesTimeSeries)
 
-                    sortArrayList()
-
+                    sortdescArrayList()
                     prepareAdapter()
 
                     // Set Today's Values..
@@ -114,13 +174,71 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
         statesListAdapter.refreshList(arrayList)
     }
 
-    private fun sortArrayList()
+    private fun sortdescArrayList()
     {
         arrayList.sortWith(Comparator { o1, o2 -> id
             var dateFormat = SimpleDateFormat("dd MMMM")
             var date1 = dateFormat.parse(o1.date)
             var date2 = dateFormat.parse(o2.date)
             return@Comparator date2.compareTo(date1)
+        })
+    }
+
+    private fun sortascArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+            var dateFormat = SimpleDateFormat("dd MMMM")
+            var date1 = dateFormat.parse(o1.date)
+            var date2 = dateFormat.parse(o2.date)
+            return@Comparator date1.compareTo(date2)
+        })
+    }
+
+    private fun sortdescConfirmArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+
+            return@Comparator ((o2.dailyconfirmed.toInt()).compareTo(o1.dailyconfirmed.toInt()))
+        })
+    }
+
+    private fun sortascConfirmArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+
+            return@Comparator ((o1.dailyconfirmed.toInt()).compareTo(o2.dailyconfirmed.toInt()))
+        })
+    }
+
+    private fun sortdescRecoverArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+
+            return@Comparator ((o2.dailyrecovered.toInt()).compareTo(o1.dailyrecovered.toInt()))
+        })
+    }
+
+    private fun sortascRecoverArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+
+            return@Comparator ((o1.dailyrecovered.toInt()).compareTo(o2.dailyrecovered.toInt()))
+        })
+    }
+
+    private fun sortdescDeathArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+
+            return@Comparator ((o2.dailydeceased.toInt()).compareTo(o1.dailydeceased.toInt()))
+        })
+    }
+
+    private fun sortascDeathArrayList()
+    {
+        arrayList.sortWith(Comparator { o1, o2 -> id
+
+            return@Comparator ((o1.dailydeceased.toInt()).compareTo(o2.dailydeceased.toInt()))
         })
     }
 }
