@@ -3,9 +3,11 @@ package com.example.covid_19
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.os.HandlerCompat.postDelayed
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
@@ -20,8 +22,6 @@ class MainActivity : AppCompatActivity()
 
         loadFragment(HomeFragment(this))
 
-        //sendNotification()
-
         bottom_nav_view.setOnNavigationItemSelectedListener { when(it.itemId)
         {
             R.id.navigation_home ->
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity()
             {
                 isDoubleBackPressed = false
                 loadFragment(NotificationFragment(this))
-                //loadFragment(DashFragment(this))
                 return@setOnNavigationItemSelectedListener true
             }
 

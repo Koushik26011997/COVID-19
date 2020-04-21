@@ -3,33 +3,99 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+<!--    <LinearLayout-->
+<!--        android:padding="6dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:weightSum="2">-->
+
+<!--        <TextView-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:text="DISTRICT"-->
+<!--            android:id="@+id/distName"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1">-->
+
+<!--        </TextView>-->
+
+<!--        <TextView-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:text="CONFIRMED"-->
+<!--            android:textColor="#99FF073A"-->
+<!--            android:id="@+id/distConfirm"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1">-->
+
+<!--        </TextView>-->
+
+<!--    </LinearLayout>-->
+
     <LinearLayout
-        android:padding="6dp"
+        android:id="@+id/header_Recycler_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:padding="8dp"
+        android:weightSum="6">
 
         <TextView
-            android:fontFamily="@font/lato"
-            android:text="DISTRICT"
             android:id="@+id/distName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-        </TextView>
+            android:layout_weight="2"
+            android:fontFamily="@font/lato"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="DISTRICT"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <TextView
-            android:fontFamily="@font/lato"
-            android:text="CONFIRMED"
-            android:textColor="#99FF073A"
             android:id="@+id/distConfirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#99FF073A"
+            android:textStyle="bold" />
 
-        </TextView>
+        <TextView
+            android:id="@+id/distActive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#99007BFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/distRecover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#9928A745"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/distDeath"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#996C757D"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

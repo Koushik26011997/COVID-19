@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
-import kotlin.collections.ArrayList
 
 class StatesSubDistWiseListAdapter(
     arrAyListConfirm: JSONArray
@@ -31,12 +30,18 @@ class StatesSubDistWiseListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
         holder.distName.text = mArrAyList.getJSONObject(position).getString("district")
-        holder.distConfirm.text = mArrAyList.getJSONObject(position).getString("confirmed")
+        holder.distConfirm.text = mArrAyList.getJSONObject(position).getString("confirmed") + "\n[+" + mArrAyList.getJSONObject(position).getJSONObject("delta").getString("confirmed") +"]"
+        holder.distActive.text = mArrAyList.getJSONObject(position).getString("active")
+        holder.distRecover.text = mArrAyList.getJSONObject(position).getString("recovered") + "\n[+" + mArrAyList.getJSONObject(position).getJSONObject("delta").getString("recovered") +"]"
+        holder.distDeath.text = mArrAyList.getJSONObject(position).getString("deceased") + "\n[+" + mArrAyList.getJSONObject(position).getJSONObject("delta").getString("deceased") +"]"
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         val distName : TextView = itemView.findViewById(R.id.distName)
         val distConfirm : TextView = itemView.findViewById(R.id.distConfirm)
+        val distActive : TextView = itemView.findViewById(R.id.distActive)
+        val distRecover : TextView = itemView.findViewById(R.id.distRecover)
+        val distDeath : TextView = itemView.findViewById(R.id.distDeath)
     }
 }

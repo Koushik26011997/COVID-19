@@ -46,38 +46,105 @@
 
     </View>
 
+<!--    <LinearLayout-->
+<!--        android:id="@+id/headingLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/line"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="5dp"-->
+<!--        android:visibility="gone"-->
+<!--        android:weightSum="2">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/distName"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:paddingLeft="6dp"-->
+<!--            android:text="DISTRICT">-->
+
+<!--        </TextView>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/distConfirmed"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:text="CONFIRMED"-->
+<!--            android:textColor="#99FF073A">-->
+
+<!--        </TextView>-->
+
+<!--    </LinearLayout>-->
+
     <LinearLayout
         android:id="@+id/headingLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line"
         android:orientation="horizontal"
-        android:padding="5dp"
+        android:padding="8dp"
         android:visibility="gone"
-        android:weightSum="2">
+        android:weightSum="6">
 
         <TextView
-            android:id="@+id/distName"
+            android:id="@+id/statesName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/lato"
+            android:gravity="start"
+            android:paddingLeft="10dp"
+            android:text="DISTRICT"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/confirmedHeading_Recycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/lato"
-            android:paddingLeft="6dp"
-            android:text="DISTRICT">
-
-        </TextView>
+            android:gravity="center"
+            android:text="CNFM"
+            android:textColor="#99FF073A"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/distConfirmed"
+            android:id="@+id/activeHeading_Recycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/lato"
-            android:text="CONFIRMED"
-            android:textColor="#99FF073A">
+            android:gravity="center"
+            android:text="ACTV"
+            android:textColor="#99007BFF"
+            android:textStyle="bold" />
 
-        </TextView>
+        <TextView
+            android:id="@+id/recoveredHeading_Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="RECV"
+            android:textColor="#9928A745"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/deceasedHeading__Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="DCSD"
+            android:textColor="#996C757D"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -86,6 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/headingLayout"
         android:padding="6dp"
+        android:nestedScrollingEnabled="false"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
