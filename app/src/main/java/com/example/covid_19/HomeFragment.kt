@@ -1,6 +1,7 @@
 package com.example.covid_19
 
 import NetworkMonitor
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.example.covid_19.states_Apis.ResponseTotalCases
 import com.example.covid_19.states_Apis.StatewiseItem
+import com.example.covid_19.states_Apis.TestedItem
 import com.google.android.material.snackbar.Snackbar
 import com.jacksonandroidnetworking.JacksonParserFactory
 import com.rxandroidnetworking.RxAndroidNetworking
@@ -25,6 +27,7 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
 {
     val activity = mainActivity
     val arrayList = arrayListOf<StatewiseItem>()
+    val testedCount = arrayListOf<TestedItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,14 +90,65 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
                 override fun onNext(response: ResponseTotalCases)
                 {
                     arrayList.clear()
+                    testedCount.clear()
                     arrayList.addAll(response.statewise)
-                    confirmedCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
-                    activeCase.text = arrayList.get(0).active
-                    recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
-                    deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
+                    testedCount.addAll(response.tested)
+
+                    valueAnimator()
+
+                    //confirmedCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
+                    //activeCase.text = arrayList.get(0).active
+                    //recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
+                    //deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
+
+                    testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalindividualstested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
                     lastUpdatedime.text = "LAST UPDATED ON: "+ arrayList.get(0).lastupdatedtime + " IST"
                     prepareAdapter()
                 }
             })
+    }
+
+    private fun valueAnimator()
+    {
+        // Confirm
+        var valueAnimatorConfirm = ValueAnimator.ofInt(0, arrayList.get(0).confirmed.toInt())
+        var valueAnimatordelteConfirm = ValueAnimator.ofInt(0, arrayList.get(0).deltaconfirmed.toInt())
+        valueAnimatorConfirm.setDuration(1500)
+        valueAnimatordelteConfirm.setDuration(1400)
+        valueAnimatorConfirm.addUpdateListener {
+            confirmedCase.text = valueAnimatorConfirm.getAnimatedValue().toString() + "\n[+" + valueAnimatordelteConfirm.getAnimatedValue().toString() + "]"
+        }
+        valueAnimatorConfirm.start()
+        valueAnimatordelteConfirm.start()
+
+        // Recover
+        var valueAnimatorRecover = ValueAnimator.ofInt(0, arrayList.get(0).recovered.toInt())
+        var valueAnimatordeltaRecover = ValueAnimator.ofInt(0, arrayList.get(0).deltarecovered.toInt())
+        valueAnimatorRecover.setDuration(1500)
+        valueAnimatordeltaRecover.setDuration(1400)
+        valueAnimatorRecover.addUpdateListener {
+            recoveredCase.text = valueAnimatorRecover.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaRecover.getAnimatedValue().toString() + "]"
+        }
+        valueAnimatorRecover.start()
+        valueAnimatordeltaRecover.start()
+
+        // Death
+        var valueAnimatorDeath = ValueAnimator.ofInt(0, arrayList.get(0).deaths.toInt())
+        var valueAnimatordeltaDeath = ValueAnimator.ofInt(0, arrayList.get(0).deltadeaths.toInt())
+        valueAnimatorDeath.setDuration(1500)
+        valueAnimatordeltaDeath.setDuration(1400)
+        valueAnimatorDeath.addUpdateListener {
+            deceasedCase.text = valueAnimatorDeath.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaDeath.getAnimatedValue().toString() + "]"
+        }
+        valueAnimatorDeath.start()
+        valueAnimatordeltaDeath.start()
+
+        // Active
+        var valueAnimatorActive = ValueAnimator.ofInt(0, arrayList.get(0).active.toInt())
+        valueAnimatorActive.setDuration(1500)
+        valueAnimatorActive.addUpdateListener {
+            activeCase.text = valueAnimatorActive.getAnimatedValue().toString()
+        }
+        valueAnimatorActive.start()
     }
 }

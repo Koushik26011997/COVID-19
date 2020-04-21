@@ -31,6 +31,15 @@ class StatesDistrictWiseListAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var isClicked = false
+        var isSorted = false
+
+        holder.statesName.text = mArrAyListState.get(position)
+
+        holder.listing.apply {
+            setHasFixedSize(true)
+            adapter = StatesSubDistWiseListAdapter(mArrAyListDistrict.get(position))
+        }
+
         holder.handleBtn.setOnClickListener() {
             if (isClicked) {
                 holder.handleBtn.setImageResource(R.drawable.ic_remove_circle_outline_black_24dp)
@@ -44,17 +53,43 @@ class StatesDistrictWiseListAdapter(
                 isClicked = true
             }
         }
-        holder.statesName.text = mArrAyListState.get(position)
-        holder.listing.apply {
-            setHasFixedSize(true)
-            adapter = StatesSubDistWiseListAdapter(mArrAyListDistrict.get(position))
-        }
+
+        // Sorting
+//        holder.distConfirmed.setOnClickListener() {
+//            if (isSorted) {
+//
+//                mArrAyListDistrict.sortWith(Comparator { o1, o2 ->
+//
+//                    return@Comparator (o1.getJSONObject(position).getString("confirmed").toInt().compareTo(o2.getJSONObject(position).getString("confirmed").toInt()))
+//                })
+//                holder.listing.apply {
+//                    setHasFixedSize(true)
+//                    adapter = StatesSubDistWiseListAdapter(mArrAyListDistrict.get(position))
+//                }
+//
+//                isSorted = false
+//            } else {
+//
+//                mArrAyListDistrict.sortWith(Comparator { o1, o2 ->
+//
+//                    return@Comparator (o2.getJSONObject(position).getString("confirmed").toInt().compareTo(o1.getJSONObject(position).getString("confirmed").toInt()))
+//                })
+//                holder.listing.apply {
+//                    setHasFixedSize(true)
+//                    adapter = StatesSubDistWiseListAdapter(mArrAyListDistrict.get(position))
+//                }
+//
+//                isSorted = true
+//            }
+//        }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var statesName: TextView = itemView.findViewById(R.id.stateName)
         var listing: RecyclerView = itemView.findViewById(R.id.districtStateList)
         var handleBtn: ImageView = itemView.findViewById(R.id.handleBtn)
-        var headingLayout : LinearLayout = itemView.findViewById(R.id.headingLayout)
+        var headingLayout: LinearLayout = itemView.findViewById(R.id.headingLayout)
+
+        var distConfirmed: TextView = itemView.findViewById(R.id.distConfirmed)
     }
 }

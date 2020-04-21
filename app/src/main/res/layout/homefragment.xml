@@ -141,10 +141,39 @@
     </View>
 
     <LinearLayout
-        android:id="@+id/updateTimeLayout"
+        android:id="@+id/testedCountLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/view2"
+        android:background="#F1F1F1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/testCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:textColor="#DE201AA2"
+            android:padding="6dp"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/testedCountLayout"
+        android:background="#FFFFFF">
+
+    </View>
+
+    <LinearLayout
+        android:id="@+id/updateTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view5"
         android:background="#F1F1F1"
         android:orientation="horizontal">
 

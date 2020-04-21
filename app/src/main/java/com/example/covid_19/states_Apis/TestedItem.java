@@ -9,17 +9,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class TestedItem {
+public class TestedItem
+{
     @JsonProperty("testsconductedbyprivatelabs")
-    private String testsconductedbyprivatelabs;
+    String testsconductedbyprivatelabs;
     @JsonProperty("totalsamplestested")
-    private String totalsamplestested;
+    String totalsamplestested;
     @JsonProperty("source")
-    private String source;
+    String source;
     @JsonProperty("updatetimestamp")
-    private String updatetimestamp;
+    String updatetimestamp;
     @JsonProperty("totalindividualstested")
-    private String totalindividualstested;
+    String totalindividualstested;
     @JsonProperty("totalpositivecases")
-    private String totalpositivecases;
+    String totalpositivecases;
+
+    public String getTestsconductedbyprivatelabs() {
+        return testsconductedbyprivatelabs;
+    }
+
+    public String getTotalsamplestested() {
+        return totalsamplestested;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getUpdatetimestamp() {
+        return updatetimestamp;
+    }
+
+    public String getTotalindividualstested() {
+        return totalindividualstested;
+    }
+
+    public String getTotalpositivecases() {
+        return totalpositivecases;
+    }
 }
