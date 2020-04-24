@@ -4,7 +4,7 @@ import NetworkMonitor
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,15 +43,19 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
+        val animation = AnimationUtils.loadAnimation(activity, R.anim.rotate)
+
         if (!NetworkMonitor(activity).isConnected)
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT).setAction("SETTINGS", View.OnClickListener {
                 startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
             }).show()
         else
+        {
             getCurrenData()
+        }
 
         prepareAdapter()
-        val animation = AnimationUtils.loadAnimation(activity, R.anim.rotate)
+
         refreshBtn.setOnClickListener(){
             refreshBtn.startAnimation(animation)
             getCurrenData()

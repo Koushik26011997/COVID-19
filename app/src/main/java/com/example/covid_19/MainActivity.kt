@@ -4,23 +4,33 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.HandlerCompat.postDelayed
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
 {
     var isDoubleBackPressed = true
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        if (supportFragmentManager.findFragmentById(R.id.main_container) == null)
+        {
+           loadFragment(HomeFragment(this))
+        }
+
         setContentView(R.layout.activity_main)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        loadFragment(HomeFragment(this))
+        //loadFragment(HomeFragment(this))
 
         bottom_nav_view.setOnNavigationItemSelectedListener { when(it.itemId)
         {
@@ -109,4 +119,29 @@ class MainActivity : AppCompatActivity()
 //                    Toast.makeText(applicationContext, "New Notification Arrived Now!", Toast.LENGTH_SHORT).show()
 //            }
 //    }
+
+    override fun onRestart()
+    {
+        super.onRestart()
+        Log.i("KP", "onRestart")
+    }
+
+    override fun onStop() {
+        Log.i("KP", "onStop")
+        super.onStop()
+    }
+
+    override fun onPause() {
+        Log.i("KP", "onPause")
+        super.onPause()
+    }
+
+    override fun onResumeFragments() {
+        Log.i("KP", "onResume")
+    }
+
+    override fun onStart() {
+        Log.i("KP", "onStart")
+        super.onStart()
+    }
 }
