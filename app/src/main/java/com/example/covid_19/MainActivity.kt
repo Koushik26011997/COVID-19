@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.HandlerCompat.postDelayed
+import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
@@ -120,28 +121,30 @@ class MainActivity : AppCompatActivity()
 //            }
 //    }
 
-    override fun onRestart()
-    {
-        super.onRestart()
-        Log.i("KP", "onRestart")
+//    override fun onRestart()
+//    {
+//        super.onRestart()
+//        Log.i("KP", "onRestart")
+//    }
+//
+//    override fun onResumeFragments()
+//    {
+//        Log.i("KP", "onResume")
+//    }
+//
+//    override fun onStart()
+//    {
+//        Log.i("KP", "onStart")
+//        super.onStart()
+//    }
+
+    override fun onResume() {
+        Log.i("KP", "onResume")
+        super.onResume()
     }
 
     override fun onStop() {
         Log.i("KP", "onStop")
         super.onStop()
-    }
-
-    override fun onPause() {
-        Log.i("KP", "onPause")
-        super.onPause()
-    }
-
-    override fun onResumeFragments() {
-        Log.i("KP", "onResume")
-    }
-
-    override fun onStart() {
-        Log.i("KP", "onStart")
-        super.onStart()
     }
 }

@@ -106,8 +106,15 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
                     //recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
                     //deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
 
-                    testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalindividualstested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
+                    if (!testedCount.get(testedCount.size-1).totalindividualstested.equals(""))
+                    {
+                        testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalindividualstested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
+                    }
+                    else
+                        testCount.text = "COUNTS OF TESTED PEOPLE WILL BE UPDATED SOON!"
+
                     lastUpdatedime.text = "LAST UPDATED ON: "+ arrayList.get(0).lastupdatedtime + " IST"
+
                     prepareAdapter()
                 }
             })
@@ -155,5 +162,11 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
             activeCase.text = valueAnimatorActive.getAnimatedValue().toString()
         }
         valueAnimatorActive.start()
+    }
+
+    override fun onResume()
+    {
+        Log.i("KP", "onResume")
+        super.onResume()
     }
 }
