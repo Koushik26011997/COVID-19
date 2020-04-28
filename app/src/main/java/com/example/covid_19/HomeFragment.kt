@@ -45,10 +45,14 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
 
         val animation = AnimationUtils.loadAnimation(activity, R.anim.rotate)
 
-        if (!NetworkMonitor(activity).isConnected)
-            Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT).setAction("SETTINGS", View.OnClickListener {
-                startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
-            }).show()
+        if (!NetworkMonitor(activity).isConnected) {
+            Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
+                .setAction("SETTINGS", View.OnClickListener {
+                    startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
+                }).show()
+
+            showPopup()
+        }
         else
         {
             getCurrenData()
@@ -70,7 +74,7 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         statesListAdapter.refreshList(arrayList)
     }
 
-    private fun getCurrenData()
+    fun getCurrenData()
     {
         activity.showLoader()
         var rxAnrRequest= RxAndroidNetworking.get(BuildConfig.BASE_URL + "data.json")
@@ -101,14 +105,15 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
 
                     valueAnimator()
 
-                    //confirmedCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
-                    //activeCase.text = arrayList.get(0).active
-                    //recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
-                    //deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
+//                    confirmedCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
+//                    activeCase.text = arrayList.get(0).active
+//                    recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
+//                    deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
 
-                    if (!testedCount.get(testedCount.size-1).totalindividualstested.equals(""))
+                    //if (!testedCount.get(testedCount.size-1).totalindividualstested.equals(""))
+                    if (!testedCount.get(testedCount.size-1).totalsamplestested.equals(""))
                     {
-                        testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalindividualstested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
+                        testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalsamplestested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
                     }
                     else
                         testCount.text = "COUNTS OF TESTED PEOPLE WILL BE UPDATED SOON!"
@@ -120,7 +125,7 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
             })
     }
 
-    private fun valueAnimator()
+    fun valueAnimator()
     {
         // Confirm
         var valueAnimatorConfirm = ValueAnimator.ofInt(0, arrayList.get(0).confirmed.toInt())
@@ -168,5 +173,13 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
     {
         Log.i("KP", "onResume")
         super.onResume()
+    }
+
+    private fun showPopup()
+    {
+        val fm = activity.supportFragmentManager
+        PopUp(activity).also {
+            it.show(fm, "confirm")
+        }
     }
 }

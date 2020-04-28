@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
-        super.onCreate(savedInstanceState)
-
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        if (supportFragmentManager.findFragmentById(R.id.main_container) == null)
-        {
-           loadFragment(HomeFragment(this))
+        try {
+            super.onCreate(savedInstanceState)
+            loadFragment(HomeFragment(this))
+        }catch (exp : Exception) {
+            if (supportFragmentManager.findFragmentById(R.id.main_container) == null) {
+                loadFragment(HomeFragment(this))
+            }
         }
-
         setContentView(R.layout.activity_main)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)

@@ -82,6 +82,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/view"
         android:layout_marginBottom="60dp"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>

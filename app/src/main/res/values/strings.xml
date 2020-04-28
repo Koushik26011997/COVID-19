@@ -6,7 +6,7 @@
     <string name="title_district">District</string>
     <string name="title_about">About</string>
     <string name="title_heading">COVID-19 TRACKER</string>
-
+    <string name="no_internet">SORRY, NO INTERNET CONNECTION !</string>
     <string name="question1">Are you official?</string>
 
     <string name="answer1">No.</string>
