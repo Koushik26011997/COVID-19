@@ -57,6 +57,7 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
                 .setAction("SETTINGS", View.OnClickListener {
                     startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
                 }).show()
+            activity.showPopup()
         }
         else
         {

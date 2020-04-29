@@ -82,7 +82,7 @@
         android:weightSum="4">
 
         <TextView
-            android:id="@+id/confirmedCase"
+            android:id="@+id/confirmCase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -154,8 +154,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:textColor="#DE201AA2"
             android:padding="6dp"
+            android:textColor="#DE201AA2"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -300,6 +300,7 @@
             android:id="@+id/statesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
         </androidx.recyclerview.widget.RecyclerView>

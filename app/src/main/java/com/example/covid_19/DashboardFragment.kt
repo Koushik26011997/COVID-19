@@ -59,9 +59,12 @@ class DashboardFragment (mainActivity: MainActivity): Fragment()
        // confirmChart = view.findViewById(R.id.barChart)
 
         if (!NetworkMonitor(activity).isConnected)
+        {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT).setAction("SETTINGS", View.OnClickListener {
                 startActivityForResult(Intent(Settings.ACTION_SETTINGS), 0)
             }).show()
+            activity.showPopup()
+        }
         else
             getCurrenData()
     }

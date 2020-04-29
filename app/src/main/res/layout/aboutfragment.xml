@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AboutFragment">
 
-
     <LinearLayout
         android:id="@+id/developerInfo"
         android:layout_width="match_parent"
@@ -14,8 +13,8 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="101dp"
-            android:layout_height="101dp"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
             android:layout_gravity="center"
             android:layout_marginTop="21dp"
             android:src="@drawable/kp">
@@ -89,17 +88,19 @@
 
             <com.andexert.library.RippleView
                 android:id="@+id/info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="12dp"
-                android:gravity="center"
-                app:rv_color="#EFAAAA"
-                app:rv_rippleDuration="500">
+                app:rv_centered="true"
+                app:rv_color="#996C757D"
+                app:rv_ripplePadding="3dp"
+                app:rv_type="simpleRipple">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
                     android:fontFamily="@font/lato"
                     android:text="Click Here To Know More!"
                     android:textColor="#99007BFF"

@@ -37,6 +37,7 @@ class DistrictFragment(mainActivity: MainActivity) : Fragment() {
                 .setAction("SETTINGS", View.OnClickListener {
                     startActivityForResult(Intent(Settings.ACTION_SETTINGS), 0)
                 }).show()
+            activity.showPopup()
         }
 
         getCurrenData()

@@ -24,9 +24,17 @@ import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class HomeFragment(mainActivity: MainActivity) : Fragment()
+class HomeFragment : Fragment()
 {
-    val activity = mainActivity
+    companion object
+    {
+        @JvmStatic
+        fun newInstance() : HomeFragment
+        {
+            return HomeFragment()
+        }
+    }
+
     val arrayList = arrayListOf<StatewiseItem>()
     val testedCount = arrayListOf<TestedItem>()
 
@@ -45,13 +53,14 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
 
         val animation = AnimationUtils.loadAnimation(activity, R.anim.rotate)
 
-        if (!NetworkMonitor(activity).isConnected) {
+        if (!NetworkMonitor(Utils.activity).isConnected)
+        {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
                 .setAction("SETTINGS", View.OnClickListener {
                     startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
                 }).show()
-
-            showPopup()
+            arrayList.clear()
+            testedCount.clear()
         }
         else
         {
@@ -61,8 +70,18 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         prepareAdapter()
 
         refreshBtn.setOnClickListener(){
-            refreshBtn.startAnimation(animation)
-            getCurrenData()
+            if (!NetworkMonitor(Utils.activity).isConnected) {
+                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
+                    .setAction("SETTINGS", View.OnClickListener {
+                        startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
+                    }).show()
+                arrayList.clear()
+                testedCount.clear()
+            }
+            else {
+                refreshBtn.startAnimation(animation)
+                getCurrenData()
+            }
         }
     }
 
@@ -76,7 +95,7 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
 
     fun getCurrenData()
     {
-        activity.showLoader()
+        Utils.activity.showLoader()
         var rxAnrRequest= RxAndroidNetworking.get(BuildConfig.BASE_URL + "data.json")
             .setPriority(Priority.HIGH)
             .build()
@@ -87,13 +106,13 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
             {
                 override fun onCompleted()
                 {
-                    activity.hideLoader()
+                    Utils.activity.hideLoader()
                 }
 
                 override fun onError(e: Throwable)
                 {
-                    activity.hideLoader()
-                    Toast.makeText(activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
+                    Utils.activity.hideLoader()
+                    Toast.makeText(Utils.activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onNext(response: ResponseTotalCases)
@@ -105,7 +124,7 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
 
                     valueAnimator()
 
-//                    confirmedCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
+//                    confirmCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
 //                    activeCase.text = arrayList.get(0).active
 //                    recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
 //                    deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
@@ -133,7 +152,8 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         valueAnimatorConfirm.setDuration(1500)
         valueAnimatordelteConfirm.setDuration(1400)
         valueAnimatorConfirm.addUpdateListener {
-            confirmedCase.text = valueAnimatorConfirm.getAnimatedValue().toString() + "\n[+" + valueAnimatordelteConfirm.getAnimatedValue().toString() + "]"
+            if (confirmCase != null)
+                confirmCase.text = valueAnimatorConfirm.getAnimatedValue().toString() + "\n[+" + valueAnimatordelteConfirm.getAnimatedValue().toString() + "]"
         }
         valueAnimatorConfirm.start()
         valueAnimatordelteConfirm.start()
@@ -144,7 +164,8 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         valueAnimatorRecover.setDuration(1500)
         valueAnimatordeltaRecover.setDuration(1400)
         valueAnimatorRecover.addUpdateListener {
-            recoveredCase.text = valueAnimatorRecover.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaRecover.getAnimatedValue().toString() + "]"
+            if (recoveredCase != null)
+                recoveredCase.text = valueAnimatorRecover.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaRecover.getAnimatedValue().toString() + "]"
         }
         valueAnimatorRecover.start()
         valueAnimatordeltaRecover.start()
@@ -155,7 +176,8 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         valueAnimatorDeath.setDuration(1500)
         valueAnimatordeltaDeath.setDuration(1400)
         valueAnimatorDeath.addUpdateListener {
-            deceasedCase.text = valueAnimatorDeath.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaDeath.getAnimatedValue().toString() + "]"
+            if (deceasedCase != null)
+                deceasedCase.text = valueAnimatorDeath.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaDeath.getAnimatedValue().toString() + "]"
         }
         valueAnimatorDeath.start()
         valueAnimatordeltaDeath.start()
@@ -164,22 +186,24 @@ class HomeFragment(mainActivity: MainActivity) : Fragment()
         var valueAnimatorActive = ValueAnimator.ofInt(0, arrayList.get(0).active.toInt())
         valueAnimatorActive.setDuration(1500)
         valueAnimatorActive.addUpdateListener {
-            activeCase.text = valueAnimatorActive.getAnimatedValue().toString()
+            if (activeCase != null)
+                activeCase.text = valueAnimatorActive.getAnimatedValue().toString()
         }
         valueAnimatorActive.start()
     }
 
     override fun onResume()
     {
-        Log.i("KP", "onResume")
         super.onResume()
+        Log.i("KP","getCurrentData")
+        getCurrenData()
     }
 
-    private fun showPopup()
-    {
-        val fm = activity.supportFragmentManager
-        PopUp(activity).also {
-            it.show(fm, "confirm")
-        }
+    override fun onStop() {
+        super.onStop()
+        Log.i("KP","clearData")
+
+        arrayList.clear()
+        testedCount.clear()
     }
 }
