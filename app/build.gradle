@@ -48,5 +48,4 @@ dependencies {
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     // Circular ImageView Dependency...
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-
 }

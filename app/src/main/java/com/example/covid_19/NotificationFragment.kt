@@ -23,14 +23,22 @@ import rx.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NotificationFragment(mainActivity: MainActivity) : Fragment()
+class NotificationFragment() : Fragment()
 {
+    companion object
+    {
+        @JvmStatic
+        fun newInstance() : NotificationFragment
+        {
+            return NotificationFragment()
+        }
+    }
+
     var isSorted = false
     var isConfirmSorted = false
     var isRecoverSorted = false
     var isDeathSorted = false
 
-    val activity = mainActivity
     val arrayList = arrayListOf<CasesTimeSeriesItem>()
     val arrayListTotal = arrayListOf<StatewiseItem>()
 
@@ -47,7 +55,7 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
-        if (!NetworkMonitor(activity).isConnected)
+        if (!NetworkMonitor(Utils.activity).isConnected)
         {
             confirmedTotal.text = "0"
             recoveredTotal.text = "0"
@@ -57,7 +65,7 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
                 .setAction("SETTINGS", View.OnClickListener {
                     startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
                 }).show()
-            activity.showPopup()
+            Utils.activity.showPopup()
         }
         else
         {
@@ -123,7 +131,7 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
 
     private fun getCurrenData()
     {
-        activity.showLoader()
+        Utils.activity.showLoader()
         var rxAnrRequest= RxAndroidNetworking.get(BuildConfig.BASE_URL + "data.json")
             .setPriority(Priority.HIGH)
             .build()
@@ -134,13 +142,13 @@ class NotificationFragment(mainActivity: MainActivity) : Fragment()
             {
                 override fun onCompleted()
                 {
-                    activity.hideLoader()
+                    Utils.activity.hideLoader()
                 }
 
                 override fun onError(e: Throwable)
                 {
-                    activity.hideLoader()
-                    Toast.makeText(activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
+                    Utils.activity.hideLoader()
+                    //Toast.makeText(Utils.activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onNext(response: ResponseDailyChanges)

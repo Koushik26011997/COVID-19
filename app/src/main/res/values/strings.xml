@@ -3,10 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_transfer">Pie</string>
-    <string name="title_district">District</string>
+    <string name="title_district">Districts</string>
     <string name="title_about">About</string>
-    <string name="title_heading">COVID-19 TRACKER</string>
+    <string name="title_heading">INDIAN COVID-19 TRACKER</string>
     <string name="no_internet">SORRY, NO INTERNET CONNECTION !</string>
+
     <string name="question1">Are you official?</string>
 
     <string name="answer1">No.</string>

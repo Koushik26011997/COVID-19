@@ -112,7 +112,7 @@ class HomeFragment : Fragment()
                 override fun onError(e: Throwable)
                 {
                     Utils.activity.hideLoader()
-                    Toast.makeText(Utils.activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(Utils.activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onNext(response: ResponseTotalCases)
@@ -130,6 +130,7 @@ class HomeFragment : Fragment()
 //                    deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
 
                     //if (!testedCount.get(testedCount.size-1).totalindividualstested.equals(""))
+
                     if (!testedCount.get(testedCount.size-1).totalsamplestested.equals(""))
                     {
                         testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalsamplestested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
@@ -199,10 +200,10 @@ class HomeFragment : Fragment()
         getCurrenData()
     }
 
-    override fun onStop() {
+    override fun onStop()
+    {
         super.onStop()
         Log.i("KP","clearData")
-
         arrayList.clear()
         testedCount.clear()
     }

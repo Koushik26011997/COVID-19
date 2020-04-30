@@ -31,31 +31,36 @@ class MainActivity : AppCompatActivity()
             when (it.itemId) {
                 R.id.navigation_home -> {
                     isDoubleBackPressed = true
-                    loadFragment(HomeFragment.newInstance())
+                    if(HomeFragment.newInstance() !=  null)
+                        loadFragment(HomeFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_dashboard -> {
                     isDoubleBackPressed = false
-                    loadFragment(NotificationFragment(this))
+                    if(NotificationFragment.newInstance() !=  null)
+                        loadFragment(NotificationFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_district -> {
                     isDoubleBackPressed = false
-                    loadFragment(DistrictFragment(this))
+                    if(DistrictFragment.newInstance() != null)
+                        loadFragment(DistrictFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_notification -> {
                     isDoubleBackPressed = false
-                    loadFragment(DashboardFragment(this))
+                    if(DashboardFragment.newInstance() != null)
+                        loadFragment(DashboardFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_about -> {
                     isDoubleBackPressed = false
-                    loadFragment(AboutFragment(this))
+                    if(AboutFragment.newInstance() != null)
+                        loadFragment(AboutFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -114,6 +119,8 @@ class MainActivity : AppCompatActivity()
 
     override fun onStart() {
         Log.i("KP", "onStart")
+        bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
+        loadFragment(HomeFragment.newInstance())
         super.onStart()
     }
 

@@ -33,9 +33,17 @@ import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class DashboardFragment (mainActivity: MainActivity): Fragment()
+class DashboardFragment(): Fragment()
 {
-    val activity = mainActivity
+    companion object
+    {
+        @JvmStatic
+        fun newInstance() : DashboardFragment
+        {
+            return DashboardFragment()
+        }
+    }
+
     val arrayListPie = arrayListOf<StatewiseItem>()
     var  pieEntry = arrayListOf<PieEntry>()
     lateinit var pieChart : PieChart
@@ -58,12 +66,12 @@ class DashboardFragment (mainActivity: MainActivity): Fragment()
         pieChart = view.findViewById(R.id.pieChart)
        // confirmChart = view.findViewById(R.id.barChart)
 
-        if (!NetworkMonitor(activity).isConnected)
+        if (!NetworkMonitor(Utils.activity).isConnected)
         {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT).setAction("SETTINGS", View.OnClickListener {
                 startActivityForResult(Intent(Settings.ACTION_SETTINGS), 0)
             }).show()
-            activity.showPopup()
+            Utils.activity.showPopup()
         }
         else
             getCurrenData()
@@ -71,7 +79,7 @@ class DashboardFragment (mainActivity: MainActivity): Fragment()
 
     private fun getCurrenData()
     {
-        activity.showLoader()
+        Utils.activity.showLoader()
         var rxAnrRequest= RxAndroidNetworking.get(BuildConfig.BASE_URL + "data.json")
             .setPriority(Priority.HIGH)
             .build()
@@ -82,12 +90,12 @@ class DashboardFragment (mainActivity: MainActivity): Fragment()
             {
                 override fun onCompleted()
                 {
-                    activity.hideLoader()
+                    Utils.activity.hideLoader()
                 }
 
                 override fun onError(e: Throwable)
                 {
-                    activity.hideLoader()
+                    Utils.activity.hideLoader()
                 }
 
                 override fun onNext(response: ResponseTotalCases)

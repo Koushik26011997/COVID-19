@@ -18,9 +18,16 @@ import kotlinx.android.synthetic.main.aboutfragment.*
 import kotlinx.android.synthetic.main.layout_bony.*
 import org.json.JSONArray
 
-class AboutFragment(mainActivity: MainActivity) : Fragment()
+class AboutFragment() : Fragment()
 {
-    val activity = mainActivity
+    companion object
+    {
+        @JvmStatic
+        fun newInstance() : AboutFragment
+        {
+            return AboutFragment()
+        }
+    }
 
     val arrayListState = arrayListOf<String>()
 
@@ -36,7 +43,7 @@ class AboutFragment(mainActivity: MainActivity) : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
-        if (!NetworkMonitor(activity).isConnected)
+        if (!NetworkMonitor(Utils.activity).isConnected)
         {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
                 .setAction("SETTINGS", View.OnClickListener {
@@ -59,7 +66,7 @@ class AboutFragment(mainActivity: MainActivity) : Fragment()
 
     private fun getCurrenData()
     {
-        activity.showLoader()
+        Utils.activity.showLoader()
         AndroidNetworking.get(BuildConfig.BASE_URL + "v2/state_district_wise.json")
             .setPriority(Priority.HIGH)
             .build()
@@ -67,7 +74,7 @@ class AboutFragment(mainActivity: MainActivity) : Fragment()
             {
                 override fun onResponse(response: JSONArray)
                 {
-                    activity.hideLoader()
+                    Utils.activity.hideLoader()
                     for (i in 0 until response.length())
                     {
                         arrayListState.add(response.getJSONObject(i).getString("state"))
@@ -78,7 +85,7 @@ class AboutFragment(mainActivity: MainActivity) : Fragment()
 
                 override fun onError(error: ANError)
                 {
-                    activity.hideLoader()
+                    Utils.activity.hideLoader()
                 }
             })
     }
