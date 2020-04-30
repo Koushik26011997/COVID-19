@@ -2,6 +2,7 @@ package com.example.covid_19
 
 import NetworkMonitor
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -168,6 +169,11 @@ class NotificationFragment() : Fragment()
                     todayDeath.text = "[+" + arrayListTotal.get(0).deltadeaths+"]"
 
                     // Set Total Values...
+                    totalTxt.text = "TOTAL (" + arrayList.size.toString() + " DAYS+)*"
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    {
+                        totalTxt.tooltipText = "This is including today"
+                    }
                     confirmedTotal.text = arrayListTotal.get(0).confirmed
                     recoveredTotal.text = arrayListTotal.get(0).recovered
                     deceasedTotal.text = arrayListTotal.get(0).deaths
@@ -249,5 +255,11 @@ class NotificationFragment() : Fragment()
 
             return@Comparator ((o1.dailydeceased.toInt()).compareTo(o2.dailydeceased.toInt()))
         })
+    }
+
+    override fun onStart()
+    {
+        super.onStart()
+        prepareAdapter()
     }
 }

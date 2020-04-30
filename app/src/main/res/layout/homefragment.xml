@@ -199,6 +199,7 @@
         android:layout_margin="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/refresh"
+        android:tooltipText="Refresh"
         app:backgroundTint="#FFFFFF"
         app:fabSize="mini"
         app:rippleColor="#F1F1F1">

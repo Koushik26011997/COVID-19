@@ -170,33 +170,35 @@
 
 
     <ScrollView
-        android:layout_below="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/view3"
         android:fillViewport="true"
         android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#FFFFFF"
             android:orientation="vertical">
 
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
+                android:elevation="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="16dp">
+                android:layout_margin="15dp">
 
             </com.github.mikephil.charting.charts.PieChart>
 
-<!--          <com.github.mikephil.charting.charts.BarChart-->
-<!--              android:id="@+id/barChart"-->
-<!--              android:layout_below="@+id/pieChart"-->
-<!--              android:layout_width="match_parent"-->
-<!--              android:layout_height="301dp">-->
+            <!--          <com.github.mikephil.charting.charts.BarChart-->
+            <!--              android:id="@+id/barChart"-->
+            <!--              android:layout_below="@+id/pieChart"-->
+            <!--              android:layout_width="match_parent"-->
+            <!--              android:layout_height="301dp">-->
 
-<!--          </com.github.mikephil.charting.charts.BarChart>-->
+            <!--          </com.github.mikephil.charting.charts.BarChart>-->
 
         </RelativeLayout>
 

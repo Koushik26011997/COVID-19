@@ -33,6 +33,12 @@ public class StatewiseItem
     String deaths;
     @JsonProperty("lastupdatedtime")
     String lastupdatedtime;
+    @JsonProperty("statenotes")
+    String statenotes;
+
+    public String getStatenotes() {
+        return statenotes;
+    }
 
     public String getRecovered() {
         return recovered;

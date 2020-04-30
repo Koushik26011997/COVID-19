@@ -1,5 +1,7 @@
 package com.example.covid_19
 
+import android.animation.ValueAnimator
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +28,20 @@ class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapt
     {
         holder.statesName.text = mArrayList.get(position+1).state
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            if (!mArrayList.get(position+1).statenotes.toString().equals(""))
+            {
+                holder.statesName.text = mArrayList.get(position+1).state + "*"
+                holder.statesName.tooltipText = mArrayList.get(position+1).statenotes.toString()
+            }
+            else
+            {
+                holder.statesName.text = mArrayList.get(position+1).state
+                holder.statesName.tooltipText = mArrayList.get(position+1).statenotes.toString()
+            }
+        }
+
         if (!mArrayList.get(position+1).deltaconfirmed.equals("0"))
             holder.confirnmedCase.text = mArrayList.get(position+1).confirmed + "\n[+"+mArrayList.get(position+1).deltaconfirmed+"]"
         else
@@ -49,6 +65,7 @@ class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapt
         mArrayList = arrayList
         notifyDataSetChanged()
     }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         val statesName : TextView = itemView.findViewById(R.id.statesName)

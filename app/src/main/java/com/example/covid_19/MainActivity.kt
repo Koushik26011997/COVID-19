@@ -10,20 +10,18 @@ import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity()
-{
+class MainActivity : AppCompatActivity() {
     private var isDoubleBackPressed = true
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        loadFragment(HomeFragment.newInstance())
         Utils.activity = this
+        bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
+        loadFragment(HomeFragment.newInstance())
 
-        if (!NetworkMonitor(this).isConnected)
-        {
+        if (!NetworkMonitor(this).isConnected) {
             showPopup()
         }
 
@@ -31,35 +29,35 @@ class MainActivity : AppCompatActivity()
             when (it.itemId) {
                 R.id.navigation_home -> {
                     isDoubleBackPressed = true
-                    if(HomeFragment.newInstance() !=  null)
+                    if (HomeFragment.newInstance() != null)
                         loadFragment(HomeFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_dashboard -> {
                     isDoubleBackPressed = false
-                    if(NotificationFragment.newInstance() !=  null)
+                    if (NotificationFragment.newInstance() != null)
                         loadFragment(NotificationFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_district -> {
                     isDoubleBackPressed = false
-                    if(DistrictFragment.newInstance() != null)
+                    if (DistrictFragment.newInstance() != null)
                         loadFragment(DistrictFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_notification -> {
                     isDoubleBackPressed = false
-                    if(DashboardFragment.newInstance() != null)
+                    if (DashboardFragment.newInstance() != null)
                         loadFragment(DashboardFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_about -> {
                     isDoubleBackPressed = false
-                    if(AboutFragment.newInstance() != null)
+                    if (AboutFragment.newInstance() != null)
                         loadFragment(AboutFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -118,10 +116,10 @@ class MainActivity : AppCompatActivity()
     }
 
     override fun onStart() {
+        super.onStart()
         Log.i("KP", "onStart")
         bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
         loadFragment(HomeFragment.newInstance())
-        super.onStart()
     }
 
     override fun onResume() {
@@ -129,8 +127,7 @@ class MainActivity : AppCompatActivity()
         super.onResume()
     }
 
-    fun showPopup()
-    {
+    fun showPopup() {
         val fm = this.supportFragmentManager
         PopUp(this).also {
             it.show(fm, "confirm")

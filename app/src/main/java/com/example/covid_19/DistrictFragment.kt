@@ -82,4 +82,10 @@ class DistrictFragment() : Fragment()
             setHasFixedSize(true)
         }
     }
+
+    override fun onStart()
+    {
+        super.onStart()
+        prepareAdapter()
+    }
 }

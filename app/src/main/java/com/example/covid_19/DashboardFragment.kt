@@ -1,6 +1,7 @@
 package com.example.covid_19
 
 import NetworkMonitor
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -111,10 +112,13 @@ class DashboardFragment(): Fragment()
                     pieEntry.add(PieEntry(arrayListPie.get(0).recovered.toFloat(), "Recovered"))
                     pieEntry.add(PieEntry(arrayListPie.get(0).deaths.toFloat(), "Death"))
 
-                    confirmedCase.text = arrayListPie.get(0).confirmed + "\n" + "[+" + arrayListPie.get(0).deltaconfirmed +"]"
-                    activeCase.text = arrayListPie.get(0).active
-                    recoveredCase.text = arrayListPie.get(0).recovered + "\n" + "[+" + arrayListPie.get(0).deltarecovered+"]"
-                    deceasedCase.text = arrayListPie.get(0).deaths + "\n" + "[+" + arrayListPie.get(0).deltadeaths+"]"
+//                    confirmedCase.text = arrayListPie.get(0).confirmed + "\n" + "[+" + arrayListPie.get(0).deltaconfirmed +"]"
+//                    activeCase.text = arrayListPie.get(0).active
+//                    recoveredCase.text = arrayListPie.get(0).recovered + "\n" + "[+" + arrayListPie.get(0).deltarecovered+"]"
+//                    deceasedCase.text = arrayListPie.get(0).deaths + "\n" + "[+" + arrayListPie.get(0).deltadeaths+"]"
+
+                    valueAnimator()
+
                     lastUpdatedime.text = "LAST UPDATED ON: "+ arrayListPie.get(0).lastupdatedtime + " IST"
 
                     preparePieChart()
@@ -155,5 +159,58 @@ class DashboardFragment(): Fragment()
         val barData = BarData(barDataSet)
         barData.barWidth = 0.3f
         confirmChart.data = barData
+    }
+
+    override fun onStart() {
+        super.onStart()
+        preparePieChart()
+    }
+
+    fun valueAnimator()
+    {
+        // Confirm
+        var valueAnimatorConfirm = ValueAnimator.ofInt(0, arrayListPie.get(0).confirmed.toInt())
+        var valueAnimatordelteConfirm = ValueAnimator.ofInt(0, arrayListPie.get(0).deltaconfirmed.toInt())
+        valueAnimatorConfirm.setDuration(1500)
+        valueAnimatordelteConfirm.setDuration(1400)
+        valueAnimatorConfirm.addUpdateListener {
+            if (confirmedCase != null)
+                confirmedCase.text = valueAnimatorConfirm.getAnimatedValue().toString() + "\n[+" + valueAnimatordelteConfirm.getAnimatedValue().toString() + "]"
+        }
+        valueAnimatorConfirm.start()
+        valueAnimatordelteConfirm.start()
+
+        // Recover
+        var valueAnimatorRecover = ValueAnimator.ofInt(0, arrayListPie.get(0).recovered.toInt())
+        var valueAnimatordeltaRecover = ValueAnimator.ofInt(0, arrayListPie.get(0).deltarecovered.toInt())
+        valueAnimatorRecover.setDuration(1500)
+        valueAnimatordeltaRecover.setDuration(1400)
+        valueAnimatorRecover.addUpdateListener {
+            if (recoveredCase != null)
+                recoveredCase.text = valueAnimatorRecover.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaRecover.getAnimatedValue().toString() + "]"
+        }
+        valueAnimatorRecover.start()
+        valueAnimatordeltaRecover.start()
+
+        // Death
+        var valueAnimatorDeath = ValueAnimator.ofInt(0, arrayListPie.get(0).deaths.toInt())
+        var valueAnimatordeltaDeath = ValueAnimator.ofInt(0, arrayListPie.get(0).deltadeaths.toInt())
+        valueAnimatorDeath.setDuration(1500)
+        valueAnimatordeltaDeath.setDuration(1400)
+        valueAnimatorDeath.addUpdateListener {
+            if (deceasedCase != null)
+                deceasedCase.text = valueAnimatorDeath.getAnimatedValue().toString() + "\n[+" + valueAnimatordeltaDeath.getAnimatedValue().toString() + "]"
+        }
+        valueAnimatorDeath.start()
+        valueAnimatordeltaDeath.start()
+
+        // Active
+        var valueAnimatorActive = ValueAnimator.ofInt(0, arrayListPie.get(0).active.toInt())
+        valueAnimatorActive.setDuration(1500)
+        valueAnimatorActive.addUpdateListener {
+            if (activeCase != null)
+                activeCase.text = valueAnimatorActive.getAnimatedValue().toString()
+        }
+        valueAnimatorActive.start()
     }
 }
