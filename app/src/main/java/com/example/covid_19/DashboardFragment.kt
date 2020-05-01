@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.example.covid_19.states_Apis.CasesTimeSeriesItem
@@ -50,6 +51,7 @@ class DashboardFragment(): Fragment()
     lateinit var pieChart : PieChart
     lateinit var confirmChart : BarChart
     val arrayListLine = arrayListOf<CasesTimeSeriesItem>()
+    lateinit var refreshLayout : SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,6 +66,9 @@ class DashboardFragment(): Fragment()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
+        refreshLayout = view.findViewById(R.id.refreshLayout3)
+        refreshLayout.setColorSchemeColors(resources.getColor(R.color.red), resources.getColor(R.color.blue), resources.getColor(R.color.green), resources.getColor(R.color.grey))
+
         pieChart = view.findViewById(R.id.pieChart)
        // confirmChart = view.findViewById(R.id.barChart)
 
@@ -76,6 +81,21 @@ class DashboardFragment(): Fragment()
         }
         else
             getCurrenData()
+
+        refreshLayout.setOnRefreshListener {
+            if (!NetworkMonitor(Utils.activity).isConnected)
+            {
+                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
+                    .setAction("SETTINGS", View.OnClickListener {
+                        startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
+                    }).show()
+            }
+            else
+            {
+                getCurrenData()
+                refreshLayout.isRefreshing = false
+            }
+        }
     }
 
     private fun getCurrenData()
@@ -106,6 +126,8 @@ class DashboardFragment(): Fragment()
 
                     arrayListLine.clear()
                     arrayListLine.addAll(response.casesTimeSeries)
+
+                    pieEntry.clear()
 
                     pieEntry.add(PieEntry(arrayListPie.get(0).confirmed.toFloat(), "Confirmed"))
                     pieEntry.add(PieEntry(arrayListPie.get(0).active.toFloat(), "Active"))

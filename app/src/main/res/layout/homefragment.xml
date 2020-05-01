@@ -189,22 +189,22 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/refreshBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_margin="16dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/refresh"
-        android:tooltipText="Refresh"
-        app:backgroundTint="#FFFFFF"
-        app:fabSize="mini"
-        app:rippleColor="#F1F1F1">
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/refreshBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:src="@drawable/refresh"-->
+<!--        android:tooltipText="Refresh"-->
+<!--        app:backgroundTint="#FFFFFF"-->
+<!--        app:fabSize="mini"-->
+<!--        app:rippleColor="#F1F1F1">-->
 
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+<!--    </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
 
     <View
         android:id="@+id/view3"
@@ -291,7 +291,8 @@
 
     </View>
 
-    <RelativeLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/view4"
@@ -306,6 +307,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-    </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

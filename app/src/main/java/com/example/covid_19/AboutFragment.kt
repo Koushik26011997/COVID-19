@@ -29,10 +29,6 @@ class AboutFragment() : Fragment()
         }
     }
 
-    val arrayListState = arrayListOf<String>()
-
-    val arrayListDistrict = arrayListOf<JSONArray>()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +39,7 @@ class AboutFragment() : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
+        Utils.activity.hideUpdates()
         if (!NetworkMonitor(Utils.activity).isConnected)
         {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
@@ -61,41 +58,6 @@ class AboutFragment() : Fragment()
                     startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
                 }).show()
             }
-        }
-    }
-
-    private fun getCurrenData()
-    {
-        Utils.activity.showLoader()
-        AndroidNetworking.get(BuildConfig.BASE_URL + "v2/state_district_wise.json")
-            .setPriority(Priority.HIGH)
-            .build()
-            .getAsJSONArray(object : JSONArrayRequestListener
-            {
-                override fun onResponse(response: JSONArray)
-                {
-                    Utils.activity.hideLoader()
-                    for (i in 0 until response.length())
-                    {
-                        arrayListState.add(response.getJSONObject(i).getString("state"))
-                        arrayListDistrict.add(response.getJSONObject(i).getJSONArray("districtData"))
-                    }
-                    prepareAdapter()
-                }
-
-                override fun onError(error: ANError)
-                {
-                    Utils.activity.hideLoader()
-                }
-            })
-    }
-
-    private fun prepareAdapter()
-    {
-        districtList.apply {
-            val statesDistrictWiseListAdapter = StatesDistrictWiseListAdapter(arrayListState, arrayListDistrict)
-            adapter = statesDistrictWiseListAdapter
-            setHasFixedSize(true)
         }
     }
 }

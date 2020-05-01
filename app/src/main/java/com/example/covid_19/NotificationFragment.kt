@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.example.covid_19.states_Apis.CasesTimeSeriesItem
@@ -43,6 +45,9 @@ class NotificationFragment() : Fragment()
     val arrayList = arrayListOf<CasesTimeSeriesItem>()
     val arrayListTotal = arrayListOf<StatewiseItem>()
 
+    lateinit var stateDayWiseList : RecyclerView
+    lateinit var refreshLayout : SwipeRefreshLayout
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,6 +58,11 @@ class NotificationFragment() : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
+        stateDayWiseList = view.findViewById(R.id.stateDayWiseList)
+        
+        refreshLayout = view.findViewById(R.id.refreshLayout1)
+        refreshLayout.setColorSchemeColors(resources.getColor(R.color.red), resources.getColor(R.color.blue), resources.getColor(R.color.green), resources.getColor(R.color.grey))
+
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
@@ -72,6 +82,22 @@ class NotificationFragment() : Fragment()
         {
             getCurrenData()
         }
+
+        refreshLayout.setOnRefreshListener {
+            if (!NetworkMonitor(Utils.activity).isConnected)
+            {
+                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
+                    .setAction("SETTINGS", View.OnClickListener {
+                        startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
+                    }).show()
+            }
+            else
+            {
+                getCurrenData()
+                refreshLayout.isRefreshing = false
+            }
+        }
+
 
         dateChange.setOnClickListener(){
             if (isSorted)

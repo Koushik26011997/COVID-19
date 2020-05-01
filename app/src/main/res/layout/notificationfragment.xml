@@ -76,16 +76,23 @@
 
     </View>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stateDayWiseList"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
+        android:id="@+id/refreshLayout1"
         android:layout_height="match_parent"
         android:layout_below="@id/view"
-        android:layout_marginBottom="60dp"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+        android:layout_marginBottom="60dp">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stateDayWiseList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <!--    <TextView-->
     <!--        android:textColor="#000000"-->

@@ -44,6 +44,19 @@
 
         </TextView>
 
+        <ImageView
+            android:id="@+id/updates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            android:src="@drawable/ic_update_black_24dp"
+            android:tooltipText="Tap to view updates!"
+            android:visibility="visible">
+
+        </ImageView>
+
     </RelativeLayout>
 
     <FrameLayout

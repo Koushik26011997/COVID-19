@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.example.covid_19.states_Apis.ResponseTotalCases
@@ -20,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jacksonandroidnetworking.JacksonParserFactory
 import com.rxandroidnetworking.RxAndroidNetworking
 import kotlinx.android.synthetic.main.homefragment.*
+import kotlinx.android.synthetic.main.notificationfragment.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -37,6 +39,7 @@ class HomeFragment : Fragment()
 
     val arrayList = arrayListOf<StatewiseItem>()
     val testedCount = arrayListOf<TestedItem>()
+    lateinit var refreshLayout : SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +54,8 @@ class HomeFragment : Fragment()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
-        val animation = AnimationUtils.loadAnimation(activity, R.anim.rotate)
+        refreshLayout = view.findViewById(R.id.refreshLayout)
+        refreshLayout.setColorSchemeColors(resources.getColor(R.color.red), resources.getColor(R.color.blue), resources.getColor(R.color.green), resources.getColor(R.color.grey))
 
         if (!NetworkMonitor(Utils.activity).isConnected)
         {
@@ -67,22 +71,37 @@ class HomeFragment : Fragment()
             getCurrenData()
         }
 
-        prepareAdapter()
-
-        refreshBtn.setOnClickListener(){
-            if (!NetworkMonitor(Utils.activity).isConnected) {
+        refreshLayout.setOnRefreshListener {
+            if (!NetworkMonitor(Utils.activity).isConnected)
+            {
                 Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
                     .setAction("SETTINGS", View.OnClickListener {
                         startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
                     }).show()
-                arrayList.clear()
-                testedCount.clear()
             }
-            else {
-                refreshBtn.startAnimation(animation)
+            else
+            {
                 getCurrenData()
+                refreshLayout.isRefreshing = false
             }
         }
+
+        prepareAdapter()
+
+//        refreshBtn.setOnClickListener(){
+//            if (!NetworkMonitor(Utils.activity).isConnected) {
+//                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
+//                    .setAction("SETTINGS", View.OnClickListener {
+//                        startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
+//                    }).show()
+//                arrayList.clear()
+//                testedCount.clear()
+//            }
+//            else {
+//                refreshBtn.startAnimation(animation)
+//                getCurrenData()
+//            }
+//        }
     }
 
     private fun prepareAdapter()
