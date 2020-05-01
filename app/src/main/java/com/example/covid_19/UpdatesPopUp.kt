@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -92,6 +93,7 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
         refreshLayout.setOnRefreshListener {
             if (!NetworkMonitor(Utils.activity).isConnected)
             {
+                refreshLayout.isRefreshing = false
                 Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
                     .setAction("SETTINGS", View.OnClickListener {
                         startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
@@ -122,8 +124,10 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
                     prepareAdapter()
                 }
 
-                override fun onError(error: ANError) {
+                override fun onError(error: ANError)
+                {
                     Utils.activity.hideLoader()
+                    Toast.makeText(Utils.activity, "Could not get the current update!", Toast.LENGTH_SHORT).show()
                 }
             })
     }

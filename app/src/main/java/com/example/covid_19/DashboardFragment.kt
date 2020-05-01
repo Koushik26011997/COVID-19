@@ -74,7 +74,7 @@ class DashboardFragment(): Fragment()
 
         if (!NetworkMonitor(Utils.activity).isConnected)
         {
-            Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT).setAction("SETTINGS", View.OnClickListener {
+            Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_LONG).setAction("SETTINGS", View.OnClickListener {
                 startActivityForResult(Intent(Settings.ACTION_SETTINGS), 0)
             }).show()
             Utils.activity.showPopup()
@@ -85,10 +85,11 @@ class DashboardFragment(): Fragment()
         refreshLayout.setOnRefreshListener {
             if (!NetworkMonitor(Utils.activity).isConnected)
             {
-                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_LONG)
                     .setAction("SETTINGS", View.OnClickListener {
                         startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
                     }).show()
+                refreshLayout.isRefreshing = false
             }
             else
             {
