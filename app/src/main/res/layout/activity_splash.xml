@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/animLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
@@ -42,16 +43,16 @@
     </TextView>
 
 
-    <com.tuyenmonkey.mkloader.MKLoader
-        android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:layout_below="@id/subTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        app:mk_color="#000000"
-        app:mk_type="TwinFishesSpinner">
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_below="@id/subTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp"
+            app:mk_color="#000000"
+            app:mk_type="TwinFishesSpinner">
 
-    </com.tuyenmonkey.mkloader.MKLoader>
+        </com.tuyenmonkey.mkloader.MKLoader>
 
 
     <TextView

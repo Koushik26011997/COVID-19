@@ -50,10 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="6dp"
-            android:src="@drawable/ic_update_black_24dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_action_transfer"
             android:tooltipText="Tap to view updates!"
-            android:visibility="visible">
+            android:visibility="gone">
 
         </ImageView>
 

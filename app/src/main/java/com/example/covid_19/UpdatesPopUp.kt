@@ -127,7 +127,7 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
                 override fun onError(error: ANError)
                 {
                     Utils.activity.hideLoader()
-                    Toast.makeText(Utils.activity, "Could not get the current update!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(Utils.activity, "Could not get the current updates!", Toast.LENGTH_SHORT).show()
                 }
             })
     }

@@ -40,7 +40,7 @@ class StatesDistrictWiseListAdapter(
             adapter = StatesSubDistWiseListAdapter(mArrAyListDistrict.get(position))
         }
 
-        holder.handleBtn.setOnClickListener() {
+        holder.containerLayout.setOnClickListener() {
             if (isClicked) {
                 holder.handleBtn.setImageResource(R.drawable.ic_remove_circle_outline_black_24dp)
                 holder.listing.visibility = View.GONE
@@ -55,10 +55,12 @@ class StatesDistrictWiseListAdapter(
         }
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var statesName: TextView = itemView.findViewById(R.id.stateName)
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
+        var statesName: TextView = itemView.findViewById(R.id.stateNameDistFragment)
         var listing: RecyclerView = itemView.findViewById(R.id.districtStateList)
-        var handleBtn: ImageView = itemView.findViewById(R.id.handleBtn)
+        var handleBtn: ImageView = itemView.findViewById(R.id.optBtn)
         var headingLayout: LinearLayout = itemView.findViewById(R.id.headingLayout)
+        var containerLayout: LinearLayout = itemView.findViewById(R.id.containerLayout)
     }
 }

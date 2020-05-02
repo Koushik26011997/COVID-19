@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/headerLayout"
+    <LinearLayout
+        android:id="@+id/containerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="#F1F1F1"
         android:orientation="horizontal"
-        android:padding="6dp">
+        android:padding="4dp">
 
         <ImageView
-            android:id="@+id/handleBtn"
+            android:id="@+id/optBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_remove_circle_outline_black_24dp">
@@ -23,25 +23,23 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/stateName"
+            android:id="@+id/stateNameDistFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/handleBtn"
+            android:layout_gravity="center"
             android:fontFamily="@font/lato"
-            android:gravity="center"
             android:paddingLeft="6dp"
             android:text="STATES NAME"
             android:textColor="#000000"
             android:textStyle="bold" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/headerLayout"
+        android:layout_below="@id/containerLayout"
         android:background="#FFFFFF">
 
     </View>
@@ -75,7 +73,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:text="CNFM"
+            android:text="C"
             android:textColor="#99FF073A"
             android:textStyle="bold" />
 
@@ -86,7 +84,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:text="ACTV"
+            android:text="A"
             android:textColor="#99007BFF"
             android:textStyle="bold" />
 
@@ -97,7 +95,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:text="RECV"
+            android:text="R"
             android:textColor="#9928A745"
             android:textStyle="bold" />
 
@@ -108,7 +106,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:text="DCSD"
+            android:text="D"
             android:textColor="#996C757D"
             android:textStyle="bold" />
     </LinearLayout>
@@ -118,12 +116,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/headingLayout"
-        android:padding="6dp"
         android:nestedScrollingEnabled="false"
+        android:padding="6dp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
-

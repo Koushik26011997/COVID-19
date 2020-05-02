@@ -34,6 +34,8 @@ import lecho.lib.hellocharts.model.LineChartData
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DashboardFragment(): Fragment()
 {
@@ -45,7 +47,8 @@ class DashboardFragment(): Fragment()
             return DashboardFragment()
         }
     }
-
+    val simpleDateFormat1 = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+    val simpleDateFormat2 = SimpleDateFormat("dd MMM, hh:mm a")
     val arrayListPie = arrayListOf<StatewiseItem>()
     var  pieEntry = arrayListOf<PieEntry>()
     lateinit var pieChart : PieChart
@@ -142,7 +145,26 @@ class DashboardFragment(): Fragment()
 
                     valueAnimator()
 
-                    lastUpdatedime.text = "LAST UPDATED ON: "+ arrayListPie.get(0).lastupdatedtime + " IST"
+                    var updateTime = SimpleDateFormat("hh:mm").format(simpleDateFormat1.parse(arrayListPie.get(0).lastupdatedtime).time)
+
+                    var currentTime = SimpleDateFormat("hh:mm").format(Date().time)
+
+                    val format = SimpleDateFormat("HH:mm")
+                    val date1 = format.parse(updateTime)
+                    val date2 = format.parse(currentTime)
+                    val diffHours  = ((date2.time - date1.time) / (60 * 60 * 1000) % 24)
+                    val differenceMin = ((date2.time - date1.time)/ (60 * 1000) % 60)
+                    var text = ""
+                    if (!diffHours.equals(0))
+                        text = " (" + diffHours + " hours ago)"
+
+                    if (!differenceMin.equals(0))
+                        text = " (" + differenceMin + " mins ago)"
+
+                    if (diffHours.equals(0) and differenceMin.equals(0))
+                        text = " (" + diffHours + " hours " + differenceMin + " mins ago)"
+
+                    lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayListPie.get(0).lastupdatedtime)) + text
 
                     preparePieChart()
                    // prepareConfirmedLineChart()
@@ -152,7 +174,7 @@ class DashboardFragment(): Fragment()
 
     private fun preparePieChart()
     {
-        pieChart.animateXY(2000, 2000)
+        pieChart.animateXY(1800, 1800)
         var pieDataSet = PieDataSet(pieEntry, "")
         pieDataSet.setColors(ColorTemplate.createColors(ColorTemplate.COLORFUL_COLORS))
         var pieData = PieData(pieDataSet)

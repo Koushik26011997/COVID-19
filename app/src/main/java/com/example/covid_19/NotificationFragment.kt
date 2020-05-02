@@ -199,7 +199,7 @@ class NotificationFragment() : Fragment()
                     totalTxt.text = "TOTAL (" + arrayList.size.toString() + " DAYS+)*"
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                     {
-                        totalTxt.tooltipText = "This is including today"
+                        totalTxt.tooltipText = "This is including today's count"
                     }
                     confirmedTotal.text = arrayListTotal.get(0).confirmed
                     recoveredTotal.text = arrayListTotal.get(0).recovered

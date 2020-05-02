@@ -32,7 +32,7 @@ class StatesDateWiseListAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        holder.date.text = mArrAyList.get(position).date + ", 20"
+        holder.date.text = mArrAyList.get(position).date.substring(0,6) + ", 2020"
         holder.confirnmedCase.text = mArrAyList.get(position).dailyconfirmed
         holder.recoveredCase.text = mArrAyList.get(position).dailyrecovered
         holder.deceasedCase.text = mArrAyList.get(position).dailydeceased

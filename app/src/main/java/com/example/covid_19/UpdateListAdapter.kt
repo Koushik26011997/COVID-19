@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid_19.states_Apis.CasesTimeSeriesItem
-import org.json.JSONArray
 import org.json.JSONObject
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
@@ -17,7 +15,7 @@ class UpdateListAdapter(arrAyListConfirm : ArrayList<JSONObject>) : RecyclerView
 {
     private var mArrAyList = arrAyListConfirm
     var timeText : Long = 0
-    var simpleDateFormat = SimpleDateFormat("dd MMM, HH:mm")
+    var simpleDateFormat = SimpleDateFormat("dd MMM, hh:mm a")
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,7 +37,11 @@ class UpdateListAdapter(arrAyListConfirm : ArrayList<JSONObject>) : RecyclerView
         timeText = mArrAyList.get(position).getLong("timestamp")
         var timestamp = Timestamp(timeText*1000)
         var updateDate  = Date(timestamp.time)
-        holder.timeStamp.text = simpleDateFormat.format(updateDate) + " IST"
+
+        holder.timeStamp.text = simpleDateFormat.format(updateDate)
+
+        if (mArrAyList.size -1 == position)
+            holder.viewPopup.visibility = View.GONE
     }
 
     fun refreshList(arraylistConfirm: ArrayList<JSONObject>)
@@ -53,5 +55,6 @@ class UpdateListAdapter(arrAyListConfirm : ArrayList<JSONObject>) : RecyclerView
 
         val updateText : TextView = itemView.findViewById(R.id.updateText)
         val timeStamp : TextView = itemView.findViewById(R.id.timeStamp)
+        val viewPopup : View = itemView.findViewById(R.id.viewPopup)
     }
 }

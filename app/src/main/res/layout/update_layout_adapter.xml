@@ -37,7 +37,7 @@
         </TextView>
 
         <View
-            android:id="@+id/view1"
+            android:id="@+id/viewPopup"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/timeStamp"

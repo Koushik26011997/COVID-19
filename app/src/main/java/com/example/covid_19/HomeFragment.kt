@@ -8,8 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
@@ -21,10 +19,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.jacksonandroidnetworking.JacksonParserFactory
 import com.rxandroidnetworking.RxAndroidNetworking
 import kotlinx.android.synthetic.main.homefragment.*
-import kotlinx.android.synthetic.main.notificationfragment.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment()
 {
@@ -39,6 +38,8 @@ class HomeFragment : Fragment()
 
     val arrayList = arrayListOf<StatewiseItem>()
     val testedCount = arrayListOf<TestedItem>()
+    val simpleDateFormat1 = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+    val simpleDateFormat2 = SimpleDateFormat("dd MMM, hh:mm a")
     lateinit var refreshLayout : SwipeRefreshLayout
 
     override fun onCreateView(
@@ -148,19 +149,38 @@ class HomeFragment : Fragment()
 //                    activeCase.text = arrayList.get(0).active
 //                    recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
 //                    deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
-
-                    //if (!testedCount.get(testedCount.size-1).totalindividualstested.equals(""))
-
+//
                     if (!testedCount.get(testedCount.size-1).totalsamplestested.equals(""))
                     {
-                        testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalsamplestested + " ON: " +testedCount.get(testedCount.size-1).updatetimestamp + " IST"
+                        testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalsamplestested + " ON: " + simpleDateFormat2.format(simpleDateFormat1.parse(testedCount.get(testedCount.size-1).updatetimestamp))
                     }
                     else
                         testCount.text = "COUNTS OF TESTED PEOPLE WILL BE UPDATED SOON!"
 
-                    lastUpdatedime.text = "LAST UPDATED ON: "+ arrayList.get(0).lastupdatedtime + " IST"
+                    val format = SimpleDateFormat("HH:mm")
+
+                    var updateTime = SimpleDateFormat("hh:mm").format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime).time)
+
+                    var currentTime = SimpleDateFormat("hh:mm").format(Date().time)
+
+                    val date1 = format.parse(updateTime)
+                    val date2 = format.parse(currentTime)
+                    val diffHours  = ((date2.time - date1.time) / (60 * 60 * 1000) % 24)
+                    val differenceMin = ((date2.time - date1.time)/ (60 * 1000) % 60)
+                    var text = ""
+                    if (!diffHours.equals(0))
+                        text = " (" + diffHours + " hours ago)"
+
+                    if (!differenceMin.equals(0))
+                        text = " (" + differenceMin + " mins ago)"
+
+                    if (diffHours.equals(0) and differenceMin.equals(0))
+                        text = " (" + diffHours + " hours " + differenceMin + " mins ago)"
+
+                    lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime)) + text
 
                     prepareAdapter()
+
                 }
             })
     }

@@ -23,12 +23,17 @@ class MainActivity : AppCompatActivity()
         Utils.activity = this
         update = findViewById(R.id.updates)
 
-        bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
-        loadFragment(HomeFragment.newInstance())
+//        bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
+//        loadFragment(HomeFragment.newInstance())
 
         if (!NetworkMonitor(this).isConnected)
         {
             showPopup()
+        }
+        else
+        {
+            bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
+            loadFragment(HomeFragment.newInstance())
         }
 
         update.setOnClickListener(){
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity()
             when (it.itemId) {
                 R.id.navigation_home -> {
                     isDoubleBackPressed = true
+                    showUpdates()
                     if (HomeFragment.newInstance() != null)
                         loadFragment(HomeFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
@@ -50,6 +56,7 @@ class MainActivity : AppCompatActivity()
 
                 R.id.navigation_dashboard -> {
                     isDoubleBackPressed = false
+                    hideUpdates()
                     if (NotificationFragment.newInstance() != null)
                         loadFragment(NotificationFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
@@ -57,6 +64,7 @@ class MainActivity : AppCompatActivity()
 
                 R.id.navigation_district -> {
                     isDoubleBackPressed = false
+                    hideUpdates()
                     if (DistrictFragment.newInstance() != null)
                         loadFragment(DistrictFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
@@ -64,6 +72,7 @@ class MainActivity : AppCompatActivity()
 
                 R.id.navigation_notification -> {
                     isDoubleBackPressed = false
+                    hideUpdates()
                     if (DashboardFragment.newInstance() != null)
                         loadFragment(DashboardFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
@@ -71,6 +80,7 @@ class MainActivity : AppCompatActivity()
 
                 R.id.navigation_about -> {
                     isDoubleBackPressed = false
+                    hideUpdates()
                     if (AboutFragment.newInstance() != null)
                         loadFragment(AboutFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
@@ -155,5 +165,10 @@ class MainActivity : AppCompatActivity()
     fun hideUpdates()
     {
         update.visibility = View.GONE
+    }
+
+    fun showUpdates()
+    {
+        update.visibility = View.VISIBLE
     }
 }
