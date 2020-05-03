@@ -39,7 +39,6 @@ class AboutFragment() : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
-        Utils.activity.hideUpdates()
         if (!NetworkMonitor(Utils.activity).isConnected)
         {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)

@@ -43,7 +43,6 @@ class DistrictFragment() : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         districtList = view.findViewById(R.id.districtList)
         refreshLayout = view.findViewById(R.id.refreshLayout2)
         refreshLayout.setColorSchemeColors(resources.getColor(R.color.red), resources.getColor(R.color.blue), resources.getColor(R.color.green), resources.getColor(R.color.grey))

@@ -8,13 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
-import com.example.covid_19.states_Apis.ResponseTotalCases
-import com.example.covid_19.states_Apis.StatewiseItem
-import com.example.covid_19.states_Apis.TestedItem
+import com.example.covid_19.states_Apis.*
 import com.google.android.material.snackbar.Snackbar
 import com.jacksonandroidnetworking.JacksonParserFactory
 import com.rxandroidnetworking.RxAndroidNetworking
@@ -52,6 +51,7 @@ class HomeFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
+        Utils.activity.showUpdates()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
@@ -70,6 +70,7 @@ class HomeFragment : Fragment()
         else
         {
             getCurrenData()
+            //getZonesData()
         }
 
         refreshLayout.setOnRefreshListener {
@@ -180,7 +181,6 @@ class HomeFragment : Fragment()
                     lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime)) + text
 
                     prepareAdapter()
-
                 }
             })
     }
@@ -246,5 +246,38 @@ class HomeFragment : Fragment()
         Log.i("KP","clearData")
         arrayList.clear()
         testedCount.clear()
+    }
+
+    // Zones data...
+    private fun getZonesData()
+    {
+        var rxAnrRequest= RxAndroidNetworking.get(BuildConfig.BASE_URL + "zones.json")
+            .setPriority(Priority.HIGH)
+            .build()
+            .getObjectObservable(ResponseZones::class.java)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<ResponseZones>
+            {
+                override fun onCompleted()
+                {
+                    Utils.activity.hideLoader()
+                }
+
+                override fun onError(e: Throwable)
+                {
+                    Utils.zonesArrayList.clear()
+                }
+
+                override fun onNext(response: ResponseZones)
+                {
+                    Utils.zonesArrayList.clear()
+                    if (response != null)
+                        Utils.zonesArrayList.addAll(response.zones)
+                }
+            })
+
+        var size = Utils.zonesArrayList.groupByTo(hashMapOf()){ ZonesItem :: getState }.size
+        Toast.makeText(Utils.activity, size, Toast.LENGTH_SHORT).show()
     }
 }

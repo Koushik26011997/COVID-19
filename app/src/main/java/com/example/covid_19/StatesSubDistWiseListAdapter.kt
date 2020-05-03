@@ -4,16 +4,22 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.covid_19.states_Apis.ResponseZones
+import com.example.covid_19.states_Apis.ZonesItem
 import org.json.JSONArray
+import java.util.stream.Collector
+import java.util.stream.Collectors
 
 class StatesSubDistWiseListAdapter(
     arrAyListConfirm: JSONArray
 ) : RecyclerView.Adapter<StatesSubDistWiseListAdapter.MyViewHolder>()
 {
     var mArrAyList = arrAyListConfirm
-
+    var zonesMap = mapOf<String, List<ResponseZones>>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -30,6 +36,14 @@ class StatesSubDistWiseListAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
+//        if (Utils.zonesArrayList.get(position).district.equals(mArrAyList.getJSONObject(position).getString("district"), ignoreCase = true))
+//        {
+//            if (Utils.zonesArrayList.get(position).zone.equals("Red"))
+//            {
+//                holder.header_Recycler_Layout.setBackgroundColor(Utils.activity.resources.getColor(R.color.red))
+//            }
+//        }
+
         if (mArrAyList.getJSONObject(position).getString("notes") != "")
         {
             holder.distName.text = mArrAyList.getJSONObject(position).getString("district") + "*"
@@ -55,5 +69,7 @@ class StatesSubDistWiseListAdapter(
         val distActive : TextView = itemView.findViewById(R.id.distActive)
         val distRecover : TextView = itemView.findViewById(R.id.distRecover)
         val distDeath : TextView = itemView.findViewById(R.id.distDeath)
+
+        val header_Recycler_Layout : LinearLayout = itemView.findViewById(R.id.header_Recycler_Layout)
     }
 }
