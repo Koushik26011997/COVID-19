@@ -6,20 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid_19.states_Apis.ResponseZones
-import com.example.covid_19.states_Apis.ZonesItem
 import org.json.JSONArray
-import java.util.stream.Collector
-import java.util.stream.Collectors
+import java.text.SimpleDateFormat
 
 class StatesSubDistWiseListAdapter(
     arrAyListConfirm: JSONArray
 ) : RecyclerView.Adapter<StatesSubDistWiseListAdapter.MyViewHolder>()
 {
     var mArrAyList = arrAyListConfirm
-    var zonesMap = mapOf<String, List<ResponseZones>>()
+    var simpleDateFormat = SimpleDateFormat("dd MMM, yyyy")
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -34,16 +31,39 @@ class StatesSubDistWiseListAdapter(
        return mArrAyList.length()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-//        if (Utils.zonesArrayList.get(position).district.equals(mArrAyList.getJSONObject(position).getString("district"), ignoreCase = true))
-//        {
-//            if (Utils.zonesArrayList.get(position).zone.equals("Red"))
-//            {
-//                holder.header_Recycler_Layout.setBackgroundColor(Utils.activity.resources.getColor(R.color.red))
-//            }
-//        }
-
+        for (i in 0 until Utils.zonesArrayList.size)
+        {
+            if (Utils.zonesArrayList[i].district.equals(mArrAyList.getJSONObject(position).getString("district"), true))
+            {
+                if (Utils.zonesArrayList[i].zone.equals("Red", true))
+                {
+                    holder.header_Recycler_Layout.setBackground(Utils.activity.getDrawable(R.drawable.red_zone))
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    {
+                        holder.header_Recycler_Layout.tooltipText = mArrAyList.getJSONObject(position).getString("district") + " is in RED ZONE\nUpdated on: "+ simpleDateFormat.format(SimpleDateFormat("dd/MM/yyyy").parse(Utils.zonesArrayList[i].lastupdated))
+                    }
+                }
+                else if (Utils.zonesArrayList[i].zone.equals("Green", true))
+                {
+                    holder.header_Recycler_Layout.setBackground(Utils.activity.getDrawable(R.drawable.green_zone))
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    {
+                        holder.header_Recycler_Layout.tooltipText = mArrAyList.getJSONObject(position).getString("district") + " is in GREEN ZONE\nUpdated on: "+ simpleDateFormat.format(SimpleDateFormat("dd/MM/yyyy").parse(Utils.zonesArrayList[i].lastupdated))
+                    }
+                }
+                else if (Utils.zonesArrayList[i].zone.equals("Orange", true))
+                {
+                    holder.header_Recycler_Layout.setBackground(Utils.activity.getDrawable(R.drawable.oranze_zone))
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    {
+                        holder.header_Recycler_Layout.tooltipText = mArrAyList.getJSONObject(position).getString("district") + " is in ORANGE ZONE\nUpdated on: "+ simpleDateFormat.format(SimpleDateFormat("dd/MM/yyyy").parse(Utils.zonesArrayList[i].lastupdated))
+                    }
+                }
+            }
+        }
         if (mArrAyList.getJSONObject(position).getString("notes") != "")
         {
             holder.distName.text = mArrAyList.getJSONObject(position).getString("district") + "*"
@@ -69,7 +89,6 @@ class StatesSubDistWiseListAdapter(
         val distActive : TextView = itemView.findViewById(R.id.distActive)
         val distRecover : TextView = itemView.findViewById(R.id.distRecover)
         val distDeath : TextView = itemView.findViewById(R.id.distDeath)
-
         val header_Recycler_Layout : LinearLayout = itemView.findViewById(R.id.header_Recycler_Layout)
     }
 }

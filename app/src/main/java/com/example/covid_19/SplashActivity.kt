@@ -1,7 +1,5 @@
 package com.example.covid_19
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,7 +28,6 @@ class SplashActivity : AppCompatActivity()
         val animation = AnimationUtils.loadAnimation(this@SplashActivity, R.anim.fade_in)
         icon.startAnimation(animation)
     }
-
 
     override fun onRestart() {
         super.onRestart()

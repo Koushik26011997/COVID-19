@@ -51,13 +51,15 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
         return builder.create()
     }
 
-    override fun onStart() {
+    override fun onStart()
+    {
         Log.i("LOL", "onStartPopUp")
         super.onStart()
-        if (!NetworkMonitor(activity).isConnected) {
+        if (!NetworkMonitor(activity).isConnected)
+        {
             dismiss()
-
         }
+
         var decorView = dialog?.window?.decorView
 
         val scaleDown = ObjectAnimator.ofPropertyValuesHolder(
@@ -107,12 +109,14 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
         }
     }
 
-    private fun getCurrenData() {
+    private fun getCurrenData()
+    {
         loaderPopup.visibility = View.VISIBLE
         AndroidNetworking.get(BuildConfig.BASE_URL + "updatelog/log.json")
             .setPriority(Priority.HIGH)
             .build()
-            .getAsJSONArray(object : JSONArrayRequestListener {
+            .getAsJSONArray(object : JSONArrayRequestListener
+             {
                 override fun onResponse(response: JSONArray)
                 {
                     loaderPopup.visibility = View.GONE
@@ -126,7 +130,7 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
 
                 override fun onError(error: ANError)
                 {
-                    Utils.activity.hideLoader()
+                    loaderPopup.visibility = View.GONE
                     Toast.makeText(Utils.activity, "Could not get the current updates!", Toast.LENGTH_SHORT).show()
                 }
             })

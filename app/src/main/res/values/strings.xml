@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">COVID-19</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dates</string>
+    <string name="title_dates">Dates</string>
     <string name="title_transfer">Pie</string>
     <string name="title_district">Districts</string>
     <string name="title_about">About</string>

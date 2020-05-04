@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
@@ -69,8 +68,9 @@ class HomeFragment : Fragment()
         }
         else
         {
+            Utils.activity.showLoader()
             getCurrenData()
-            //getZonesData()
+            getZonesData()
         }
 
         refreshLayout.setOnRefreshListener {
@@ -90,21 +90,6 @@ class HomeFragment : Fragment()
         }
 
         prepareAdapter()
-
-//        refreshBtn.setOnClickListener(){
-//            if (!NetworkMonitor(Utils.activity).isConnected) {
-//                Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)
-//                    .setAction("SETTINGS", View.OnClickListener {
-//                        startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
-//                    }).show()
-//                arrayList.clear()
-//                testedCount.clear()
-//            }
-//            else {
-//                refreshBtn.startAnimation(animation)
-//                getCurrenData()
-//            }
-//        }
     }
 
     private fun prepareAdapter()
@@ -168,15 +153,30 @@ class HomeFragment : Fragment()
                     val date2 = format.parse(currentTime)
                     val diffHours  = ((date2.time - date1.time) / (60 * 60 * 1000) % 24)
                     val differenceMin = ((date2.time - date1.time)/ (60 * 1000) % 60)
+
                     var text = ""
-                    if (!diffHours.equals(0))
+
+                    if (diffHours.compareTo(1) == 0)
+                        text = " (" + diffHours + " hour ago)"
+
+                    if (diffHours > 1)
                         text = " (" + diffHours + " hours ago)"
 
-                    if (!differenceMin.equals(0))
+                    if (differenceMin.compareTo(1) == 0)
+                        text = " (" + differenceMin + " min ago)"
+
+                    if (differenceMin > 1)
                         text = " (" + differenceMin + " mins ago)"
 
-                    if (diffHours.equals(0) and differenceMin.equals(0))
+                    if ((diffHours.compareTo(1) == 0) and (differenceMin > 1))
+                        text = " (" + diffHours + " hour " + differenceMin + " mins ago)"
+
+                    if ((diffHours > 1) and (differenceMin.compareTo(1) == 0))
+                        text = " (" + diffHours + " hours " + differenceMin + " min ago)"
+
+                    if ((diffHours > 1) and (differenceMin > 1))
                         text = " (" + diffHours + " hours " + differenceMin + " mins ago)"
+
 
                     lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime)) + text
 
@@ -251,6 +251,7 @@ class HomeFragment : Fragment()
     // Zones data...
     private fun getZonesData()
     {
+        Utils.activity.showLoader()
         var rxAnrRequest= RxAndroidNetworking.get(BuildConfig.BASE_URL + "zones.json")
             .setPriority(Priority.HIGH)
             .build()
@@ -266,6 +267,7 @@ class HomeFragment : Fragment()
 
                 override fun onError(e: Throwable)
                 {
+                    Utils.activity.hideLoader()
                     Utils.zonesArrayList.clear()
                 }
 
@@ -276,8 +278,5 @@ class HomeFragment : Fragment()
                         Utils.zonesArrayList.addAll(response.zones)
                 }
             })
-
-        var size = Utils.zonesArrayList.groupByTo(hashMapOf()){ ZonesItem :: getState }.size
-        Toast.makeText(Utils.activity, size, Toast.LENGTH_SHORT).show()
     }
 }

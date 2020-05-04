@@ -16,6 +16,7 @@ import com.androidnetworking.interfaces.JSONArrayRequestListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.aboutfragment.*
 import kotlinx.android.synthetic.main.layout_bony.*
+import okhttp3.internal.Util
 import org.json.JSONArray
 
 class AboutFragment() : Fragment()
@@ -39,6 +40,7 @@ class AboutFragment() : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
+        Utils.activity.update.visibility = View.GONE
         if (!NetworkMonitor(Utils.activity).isConnected)
         {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)

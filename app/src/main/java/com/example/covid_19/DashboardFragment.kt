@@ -154,14 +154,15 @@ class DashboardFragment(): Fragment()
                     val date2 = format.parse(currentTime)
                     val diffHours  = ((date2.time - date1.time) / (60 * 60 * 1000) % 24)
                     val differenceMin = ((date2.time - date1.time)/ (60 * 1000) % 60)
+
                     var text = ""
-                    if (!diffHours.equals(0))
+                    if (diffHours >= 1)
                         text = " (" + diffHours + " hours ago)"
 
-                    if (!differenceMin.equals(0))
+                    if (differenceMin >= 1)
                         text = " (" + differenceMin + " mins ago)"
 
-                    if (diffHours.equals(0) and differenceMin.equals(0))
+                    if ((diffHours >= 1) and (differenceMin >= 1))
                         text = " (" + diffHours + " hours " + differenceMin + " mins ago)"
 
                     lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayListPie.get(0).lastupdatedtime)) + text

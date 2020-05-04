@@ -8,4 +8,8 @@
     <color name="blue">#99007BFF</color>
     <color name="green">#9928A745</color>
     <color name="grey">#996C757D</color>
+
+    <color name="orangeZone">@android:color/holo_orange_dark</color>
+    <color name="redZone">@android:color/holo_red_light</color>
+    <color name="greenZone">@android:color/holo_green_light</color>
 </resources>

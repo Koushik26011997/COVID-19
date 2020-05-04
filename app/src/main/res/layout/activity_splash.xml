@@ -36,23 +36,23 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/lato"
         android:gravity="center"
-        android:text="An Undeclared World War III"
+        android:text="An Undeclared World War - III"
         android:textColor="#000000"
         android:textSize="17sp">
 
     </TextView>
 
 
-        <com.tuyenmonkey.mkloader.MKLoader
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:layout_below="@id/subTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="21dp"
-            app:mk_color="#000000"
-            app:mk_type="TwinFishesSpinner">
+<!--        <com.tuyenmonkey.mkloader.MKLoader-->
+<!--            android:layout_width="51dp"-->
+<!--            android:layout_height="51dp"-->
+<!--            android:layout_below="@id/subTitle"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="21dp"-->
+<!--            app:mk_color="#000000"-->
+<!--            app:mk_type="TwinFishesSpinner">-->
 
-        </com.tuyenmonkey.mkloader.MKLoader>
+<!--        </com.tuyenmonkey.mkloader.MKLoader>-->
 
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/lato"
         android:gravity="center"
         android:text="#STAY HOME  #STAY JHAKKAS"
