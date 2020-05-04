@@ -168,6 +168,9 @@ class HomeFragment : Fragment()
                     if (differenceMin > 1)
                         text = " (" + differenceMin + " mins ago)"
 
+                    if ((diffHours.compareTo(1) == 0) and (differenceMin.compareTo(1) == 0))
+                        text = " (" + diffHours + " hour " + differenceMin + " min ago)"
+
                     if ((diffHours.compareTo(1) == 0) and (differenceMin > 1))
                         text = " (" + diffHours + " hour " + differenceMin + " mins ago)"
 

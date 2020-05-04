@@ -2,6 +2,7 @@ package com.example.covid_19
 
 import android.animation.ValueAnimator
 import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapt
             if (!mArrayList.get(position+1).statenotes.toString().equals(""))
             {
                 holder.statesName.text = mArrayList.get(position+1).state + "*"
-                holder.statesName.tooltipText = mArrayList.get(position+1).statenotes.toString()
+                holder.statesName.tooltipText = Html.fromHtml(mArrayList.get(position+1).statenotes.toString())
             }
             else
             {

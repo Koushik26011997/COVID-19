@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
@@ -8,12 +9,12 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_view_day_black_24dp"
         android:title="@string/title_dates" />
 
     <item
         android:id="@+id/navigation_district"
-        android:icon="@drawable/ic_casino_black_24dp"
+        android:icon="@drawable/ic_view_list_black_24dp"
         android:title="@string/title_district" />
 
     <item
