@@ -18,7 +18,7 @@
             android:id="@+id/optBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_remove_circle_outline_black_24dp">
+            android:src="@drawable/ic_add_circle_outline_black_24dp">
 
         </ImageView>
 

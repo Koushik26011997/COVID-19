@@ -3,10 +3,10 @@ package com.example.covid_19
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 
@@ -30,7 +30,8 @@ class StatesDistrictWiseListAdapter(
         return mArrAyListState.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int)
+    {
         var isClicked = false
 
         holder.statesName.text = mArrAyListState.get(position)
@@ -42,12 +43,12 @@ class StatesDistrictWiseListAdapter(
 
         holder.containerLayout.setOnClickListener() {
             if (isClicked) {
-                holder.handleBtn.setImageResource(R.drawable.ic_remove_circle_outline_black_24dp)
+                holder.handleBtn.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
                 holder.listing.visibility = View.GONE
                 holder.headingLayout.visibility = View.GONE
                 isClicked = false
             } else {
-                holder.handleBtn.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
+                holder.handleBtn.setImageResource(R.drawable.ic_remove_circle_outline_black_24dp)
                 holder.listing.visibility = View.VISIBLE
                 holder.headingLayout.visibility = View.VISIBLE
                 isClicked = true

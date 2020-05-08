@@ -78,7 +78,7 @@ class UpdatesPopUp(mainActivity: MainActivity) : DialogFragment()
         refreshLayout = view.findViewById(R.id.refreshLayout4)
         loaderPopup = view.findViewById(R.id.loaderPopup)
         refreshLayout.setColorSchemeColors(resources.getColor(R.color.red), resources.getColor(R.color.blue), resources.getColor(R.color.green), resources.getColor(R.color.grey))
-        isCancelable = false
+        isCancelable = true
         img_cancel.setOnClickListener() {
             dismiss()
         }
