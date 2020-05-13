@@ -3,7 +3,8 @@
     <color name="white">#FFFFFF</color>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+<!--    <color name="colorAccent">#03DAC5</color>-->
+    <color name="colorAccent">#996C757D</color>
 
     <color name="red">#99FF073A</color>
     <color name="blue">#99007BFF</color>

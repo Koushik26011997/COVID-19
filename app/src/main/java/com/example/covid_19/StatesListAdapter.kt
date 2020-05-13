@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.states_Apis.StatewiseItem
+import java.text.NumberFormat
 
 class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapter<StatesListAdapter.MyViewHolder>()
 {
@@ -44,21 +45,21 @@ class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapt
         }
 
         if (!mArrayList.get(position+1).deltaconfirmed.equals("0"))
-            holder.confirnmedCase.text = mArrayList.get(position+1).confirmed + "\n[+"+mArrayList.get(position+1).deltaconfirmed+"]"
+            holder.confirnmedCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).confirmed.toInt()) + "\n[+"+NumberFormat.getInstance().format(mArrayList.get(position+1).deltaconfirmed.toInt())+"]"
         else
-            holder.confirnmedCase.text = mArrayList.get(position+1).confirmed
+            holder.confirnmedCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).confirmed.toInt())
 
-        holder.activeCase.text = mArrayList.get(position+1).active
+        holder.activeCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).active.toInt())
 
         if (!mArrayList.get(position+1).deltarecovered.equals("0"))
-            holder.recoveredCase.text = mArrayList.get(position+1).recovered + "\n[+"+mArrayList.get(position+1).deltarecovered+"]"
+            holder.recoveredCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).recovered.toInt()) + "\n[+"+NumberFormat.getInstance().format(mArrayList.get(position+1).deltarecovered.toInt())+"]"
         else
-            holder.recoveredCase.text = mArrayList.get(position+1).recovered
+            holder.recoveredCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).recovered.toInt())
 
         if (!mArrayList.get(position+1).deltadeaths.equals("0"))
-            holder.deceasedCase.text = mArrayList.get(position+1).deaths + "\n[+"+mArrayList.get(position+1).deltadeaths+"]"
+            holder.deceasedCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).deaths.toInt()) + "\n[+"+NumberFormat.getInstance().format(mArrayList.get(position+1).deltadeaths.toInt())+"]"
         else
-            holder.deceasedCase.text = mArrayList.get(position+1).deaths
+            holder.deceasedCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).deaths.toInt())
     }
 
     fun refreshList(arrayList: ArrayList<StatewiseItem>)

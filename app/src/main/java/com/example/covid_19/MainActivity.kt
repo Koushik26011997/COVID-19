@@ -71,8 +71,9 @@ class MainActivity : AppCompatActivity()
 
                 R.id.navigation_about -> {
                     isDoubleBackPressed = false
-                    if (AboutFragment.newInstance() != null)
-                        loadFragment(AboutFragment.newInstance())
+                    //if (AboutFragment.newInstance() != null)
+                    if (WorldFragment.newInstance() != null)
+                        loadFragment(WorldFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
             }

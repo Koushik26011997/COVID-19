@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.notificationfragment.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -191,9 +192,9 @@ class NotificationFragment() : Fragment()
                     prepareAdapter()
 
                     // Set Today's Values..
-                    todayConfirmed.text = "[+" + arrayListTotal.get(0).deltaconfirmed +"]"
-                    todayRecovered.text = "[+" + arrayListTotal.get(0).deltarecovered +"]"
-                    todayDeath.text = "[+" + arrayListTotal.get(0).deltadeaths+"]"
+                    todayConfirmed.text = "[+" + NumberFormat.getInstance().format(arrayListTotal.get(0).deltaconfirmed.toInt()) +"]"
+                    todayRecovered.text = "[+" + NumberFormat.getInstance().format(arrayListTotal.get(0).deltarecovered.toInt()) +"]"
+                    todayDeath.text = "[+" + NumberFormat.getInstance().format(arrayListTotal.get(0).deltadeaths.toInt()) +"]"
 
                     // Set Total Values...
                     totalTxt.text = "TOTAL (" + arrayList.size.toString() + " DAYS+)*"
@@ -201,9 +202,9 @@ class NotificationFragment() : Fragment()
                     {
                         totalTxt.tooltipText = "This is including today's count"
                     }
-                    confirmedTotal.text = arrayListTotal.get(0).confirmed
-                    recoveredTotal.text = arrayListTotal.get(0).recovered
-                    deceasedTotal.text = arrayListTotal.get(0).deaths
+                    confirmedTotal.text = NumberFormat.getInstance().format(arrayListTotal.get(0).confirmed.toInt())
+                    recoveredTotal.text = NumberFormat.getInstance().format(arrayListTotal.get(0).recovered.toInt())
+                    deceasedTotal.text = NumberFormat.getInstance().format(arrayListTotal.get(0).deaths.toInt())
                 }
             })
     }

@@ -8,7 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
@@ -20,6 +23,7 @@ import kotlinx.android.synthetic.main.homefragment.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +38,9 @@ class HomeFragment : Fragment()
         }
     }
 
+    lateinit var statesList : RecyclerView
+    lateinit var testCount : TextView
+    lateinit var lastUpdatedime : TextView
     val arrayList = arrayListOf<StatewiseItem>()
     val testedCount = arrayListOf<TestedItem>()
     val simpleDateFormat1 = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
@@ -54,6 +61,9 @@ class HomeFragment : Fragment()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 
+        statesList =  view.findViewById(R.id.statesList)
+        testCount = view.findViewById(R.id.testCount)
+        lastUpdatedime = view.findViewById(R.id.lastUpdatedime)
         refreshLayout = view.findViewById(R.id.refreshLayout)
         refreshLayout.setColorSchemeColors(resources.getColor(R.color.red), resources.getColor(R.color.blue), resources.getColor(R.color.green), resources.getColor(R.color.grey))
 
@@ -85,6 +95,7 @@ class HomeFragment : Fragment()
             else
             {
                 getCurrenData()
+                getZonesData()
                 refreshLayout.isRefreshing = false
             }
         }
@@ -119,7 +130,7 @@ class HomeFragment : Fragment()
                 override fun onError(e: Throwable)
                 {
                     Utils.activity.hideLoader()
-                    //Toast.makeText(Utils.activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(Utils.activity.applicationContext, "Could not get the current data!", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onNext(response: ResponseTotalCases)
@@ -131,14 +142,15 @@ class HomeFragment : Fragment()
 
                     valueAnimator()
 
-//                    confirmCase.text = arrayList.get(0).confirmed + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
-//                    activeCase.text = arrayList.get(0).active
-//                    recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
-//                    deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
+//                  confirmCase.text = NumberFormat.getInstance().format(arrayList.get(0).confirmed.toInt()) + "\n" + "[+" + arrayList.get(0).deltaconfirmed +"]"
+//                  activeCase.text = arrayList.get(0).active
+//                  recoveredCase.text = arrayList.get(0).recovered + "\n" + "[+" + arrayList.get(0).deltarecovered+"]"
+//                  deceasedCase.text = arrayList.get(0).deaths + "\n" + "[+" + arrayList.get(0).deltadeaths+"]"
 //
                     if (!testedCount.get(testedCount.size-1).totalsamplestested.equals(""))
                     {
-                        testCount.text = "TESTED " + testedCount.get(testedCount.size-1).totalsamplestested + " ON: " + simpleDateFormat2.format(simpleDateFormat1.parse(testedCount.get(testedCount.size-1).updatetimestamp))
+                        var count = NumberFormat.getInstance().format(testedCount.get(testedCount.size-1).totalsamplestested.toInt())
+                        testCount.text = "TESTED " + count + " ON " + simpleDateFormat2.format(simpleDateFormat1.parse(testedCount.get(testedCount.size-1).updatetimestamp))
                     }
                     else
                         testCount.text = "COUNTS OF TESTED PEOPLE WILL BE UPDATED SOON!"
@@ -181,7 +193,7 @@ class HomeFragment : Fragment()
                         text = " (" + diffHours + " hours " + differenceMin + " mins ago)"
 
 
-                    lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime)) + text
+                    lastUpdatedime.text = "UPDATED ON "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime)) + text
 
                     prepareAdapter()
                 }

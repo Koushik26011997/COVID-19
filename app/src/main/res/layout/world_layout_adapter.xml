@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp">
+
+    <RelativeLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F1F1F1"
+        android:elevation="6dp"
+        android:padding="8dp">
+
+        <TextView
+            android:textSize="14sp"
+            android:id="@+id/tv_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:text="COUNTRY NAME"
+            android:textColor="#000000"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <View
+            android:layout_marginLeft="3dp"
+            android:layout_below="@id/tv_country"
+            android:background="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp">
+
+        </View>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/tv_cases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_country"
+            android:fontFamily="@font/lato"
+            android:text=" CASES: "
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/val_cases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_country"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/lato"
+            android:text="0"
+            android:textColor="#000000">
+
+        </TextView>
+
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/tv_recovered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_cases"
+            android:fontFamily="@font/lato"
+            android:text=" RECOVERED: "
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/val_recovered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/val_cases"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/lato"
+            android:text="0"
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/tv_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_recovered"
+            android:fontFamily="@font/lato"
+            android:text=" ACTIVE: "
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/val_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/val_recovered"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/lato"
+            android:text="0"
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/tv_deaths"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_active"
+            android:fontFamily="@font/lato"
+            android:text=" DEATHS: "
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/val_deaths"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/val_active"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/lato"
+            android:text="0"
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/tv_critical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_deaths"
+            android:fontFamily="@font/lato"
+            android:text=" CRITICALS: "
+            android:textColor="#000000">
+
+        </TextView>
+
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/val_critical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/val_deaths"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/lato"
+            android:text="0"
+            android:textColor="#000000">
+
+        </TextView>
+    </RelativeLayout>
+
+</RelativeLayout>

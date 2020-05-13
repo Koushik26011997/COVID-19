@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 
 class StatesSubDistWiseListAdapter(
@@ -76,10 +77,10 @@ class StatesSubDistWiseListAdapter(
         {
             holder.distName.text = mArrAyList.getJSONObject(position).getString("district")
         }
-        holder.distConfirm.text = mArrAyList.getJSONObject(position).getString("confirmed") + "\n[+" + mArrAyList.getJSONObject(position).getJSONObject("delta").getString("confirmed") +"]"
-        holder.distActive.text = mArrAyList.getJSONObject(position).getString("active")
-        holder.distRecover.text = mArrAyList.getJSONObject(position).getString("recovered") + "\n[+" + mArrAyList.getJSONObject(position).getJSONObject("delta").getString("recovered") +"]"
-        holder.distDeath.text = mArrAyList.getJSONObject(position).getString("deceased") + "\n[+" + mArrAyList.getJSONObject(position).getJSONObject("delta").getString("deceased") +"]"
+        holder.distConfirm.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("confirmed").toInt()) + "\n[+" + NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getJSONObject("delta").getString("confirmed").toInt()) +"]"
+        holder.distActive.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("active").toInt())
+        holder.distRecover.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("recovered").toInt()) + "\n[+" + NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getJSONObject("delta").getString("recovered").toInt()) +"]"
+        holder.distDeath.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("deceased").toInt()) + "\n[+" + NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getJSONObject("delta").getString("deceased").toInt()) +"]"
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

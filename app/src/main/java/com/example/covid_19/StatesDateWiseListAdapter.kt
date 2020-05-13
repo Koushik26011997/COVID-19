@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.states_Apis.CasesTimeSeriesItem
 import org.json.JSONObject
+import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,9 +34,9 @@ class StatesDateWiseListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
         holder.date.text = mArrAyList.get(position).date.substring(0,6) + ", 2020"
-        holder.confirnmedCase.text = mArrAyList.get(position).dailyconfirmed
-        holder.recoveredCase.text = mArrAyList.get(position).dailyrecovered
-        holder.deceasedCase.text = mArrAyList.get(position).dailydeceased
+        holder.confirnmedCase.text = NumberFormat.getInstance().format(mArrAyList.get(position).dailyconfirmed.toInt())
+        holder.recoveredCase.text = NumberFormat.getInstance().format(mArrAyList.get(position).dailyrecovered.toInt())
+        holder.deceasedCase.text = NumberFormat.getInstance().format(mArrAyList.get(position).dailydeceased.toInt())
     }
 
     fun refreshList(arraylistConfirm: ArrayList<CasesTimeSeriesItem>)
