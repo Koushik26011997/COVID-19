@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
@@ -71,9 +73,9 @@ class MainActivity : AppCompatActivity()
 
                 R.id.navigation_about -> {
                     isDoubleBackPressed = false
-                    //if (AboutFragment.newInstance() != null)
-                    if (WorldFragment.newInstance() != null)
-                        loadFragment(WorldFragment.newInstance())
+                    if (AboutFragment.newInstance() != null)
+                    //if (WorldFragment.newInstance() != null)
+                        loadFragment(AboutFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -81,7 +83,27 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean
+    {
+        menuInflater.inflate(R.menu.bottom_nav_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        var id = item.itemId
+        when (id)
+        {
+            R.id.navigation_updates ->
+            {
+                Toast.makeText(applicationContext, "Updates!", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun loadFragment(fragment: Fragment)
+    {
         update.visibility = View.VISIBLE
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, fragment)
@@ -111,31 +133,15 @@ class MainActivity : AppCompatActivity()
         loaderLayout.visibility = View.GONE
     }
 
-//    private fun sendNotification()
-//    {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-//        {
-//            var notificationChannel = NotificationChannel("Notification_123", "MyNotification", NotificationManager.IMPORTANCE_HIGH)
-//            var notificationManager = getSystemService(NotificationManager::class.java)
-//            notificationManager.createNotificationChannel(notificationChannel)
-//        }
-//        FirebaseMessaging.getInstance().subscribeToTopic("general")
-//            .addOnCompleteListener {
-//                if (it.isSuccessful)
-//                    Toast.makeText(applicationContext, "New Notification Arrived Now!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-
     override fun onRestart() {
         super.onRestart()
         Log.i("KP", "onRestart")
     }
 
-    override fun onStart() {
+    override fun onStart()
+    {
         super.onStart()
         Log.i("KP", "onStart")
-//        bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
-//        loadFragment(HomeFragment.newInstance())
     }
 
     override fun onResume() {

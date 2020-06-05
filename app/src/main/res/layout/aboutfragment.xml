@@ -17,10 +17,10 @@
             android:layout_height="105dp"
             android:layout_gravity="center"
             android:layout_marginTop="21dp"
-            android:src="@drawable/kp">
+            android:src="@drawable/techno">
 
         </de.hdodenhof.circleimageview.CircleImageView>
-
+<!--        android:text="Developed By,\nMr. Koushik Paul,\nAndroid Apps Developer"-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/lato"
             android:gravity="center"
-            android:text="Developed By,\nMr. Koushik Paul,\nAndroid Apps Developer"
+            android:text="Developed By,\n\n1. Ahana Dutta\n2. Priyanka Saha\n3. Dipisha Sarkar \n4. Sripurna Podder"
             android:textColor="#000000"
             android:textStyle="bold" />
 

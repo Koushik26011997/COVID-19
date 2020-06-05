@@ -27,5 +27,7 @@
     <string name="question5">Why are you guys putting in time and resources to do this while not gaining a single penny from it?</string>
 
     <string name="answer5">Because it affects all of us. Today its someone else who is getting infected tomorrow it could be us. We need to prevent the spread of this virus. We need to document the data so that people with knowledge can use this data to make informed decisions.</string>
+    <string name="updates">Updates</string>
+    <string name="help">Help</string>
 
 </resources>

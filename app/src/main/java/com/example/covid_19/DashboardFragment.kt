@@ -149,7 +149,7 @@ class DashboardFragment(): Fragment()
 
                     var currentTime = SimpleDateFormat("hh:mm").format(Date().time)
 
-                    val format = SimpleDateFormat("HH:mm")
+                    val format = SimpleDateFormat("hh:mm")
                     val date1 = format.parse(updateTime)
                     val date2 = format.parse(currentTime)
                     val diffHours  = ((date2.time - date1.time) / (60 * 60 * 1000) % 24)

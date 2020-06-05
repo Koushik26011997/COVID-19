@@ -155,7 +155,8 @@ class HomeFragment : Fragment()
                     else
                         testCount.text = "COUNTS OF TESTED PEOPLE WILL BE UPDATED SOON!"
 
-                    val format = SimpleDateFormat("HH:mm")
+                    val format = SimpleDateFormat("hh:mm")
+
 
                     var updateTime = SimpleDateFormat("hh:mm").format(simpleDateFormat1.parse(arrayList.get(0).lastupdatedtime).time)
 

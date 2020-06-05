@@ -1,6 +1,5 @@
 package com.example.covid_19
 
-import android.animation.ValueAnimator
 import android.os.Build
 import android.text.Html
 import android.view.LayoutInflater
@@ -9,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.states_Apis.StatewiseItem
+import com.skydoves.balloon.createBalloon
+import com.skydoves.balloon.showAlignTop
 import java.text.NumberFormat
 
 class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapter<StatesListAdapter.MyViewHolder>()
@@ -35,7 +36,25 @@ class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapt
             if (!mArrayList.get(position+1).statenotes.toString().equals(""))
             {
                 holder.statesName.text = mArrayList.get(position+1).state + "*"
-                holder.statesName.tooltipText = Html.fromHtml(mArrayList.get(position+1).statenotes.toString())
+//              holder.statesName.tooltipText = Html.fromHtml(mArrayList.get(position+1).statenotes.toString())
+                holder.statesName.setOnClickListener(){
+                    holder.statesName.showAlignTop(createBalloon(Utils.activity){
+                        setArrowSize(10)
+                        setWidthRatio(1.0f)
+                        setHeight(150)
+                        setPadding(10)
+                        setTextSize(15F)
+                        setAutoDismissDuration(5000L)
+                        setArrowPosition(0.1f)
+                        setCornerRadius(10f)
+                        setAlpha(0.9f)
+                        setTextColorResource(R.color.white)
+                        setText(Html.fromHtml(mArrayList.get(position+1).statenotes).toString())
+                        //setIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_profile))
+                        setBackgroundColorResource(R.color.colorAccent)
+                        setLifecycleOwner(lifecycleOwner)
+                    })
+                }
             }
             else
             {

@@ -28,20 +28,34 @@ class WorldListAdapter(arrayList: ArrayList<JSONObject>): RecyclerView.Adapter<W
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-//        if (position == 0)
-//            holder.tv_country.text = "INFORMATION OF "+ (mArrayList.size-1) +" COUNTRIES"
-//        else
-//            holder.tv_country.text = mArrayList.get(position).getString("country") + " [#"+ position +"]"
+        if (position == 0)
+            holder.tv_country.text = mArrayList.get(position).getString("country")
+        else
+            holder.tv_country.text = mArrayList.get(position).getString("country") + " [#"+ position +"]"
 
-        holder.tv_country.text = mArrayList.get(position).getString("country")
+ //       holder.tv_country.text = mArrayList.get(position).getString("country")
+
         holder.val_cases.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("cases").toInt())
+
         if (mArrayList.get(position).getString("recovered") != "null")
             holder.val_recovered.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("recovered").toInt())
         else
             holder.val_recovered.text = "N/A"
-        holder.val_active.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("active").toInt())
-        holder.val_deaths.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("deaths").toInt())
-        holder.val_critical.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("critical").toInt())
+
+        if (mArrayList.get(position).getString("active") != "null")
+            holder.val_active.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("active").toInt())
+        else
+            holder.val_active.text = "N/A"
+
+        if (mArrayList.get(position).getString("deaths") != "null")
+            holder.val_deaths.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("deaths").toInt())
+        else
+            holder.val_deaths.text = "N/A"
+
+        if (mArrayList.get(position).getString("critical") != "null")
+            holder.val_critical.text = NumberFormat.getInstance().format(mArrayList.get(position).getString("critical").toInt())
+        else
+            holder.val_critical.text = "N/A"
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -72,7 +86,7 @@ class WorldListAdapter(arrayList: ArrayList<JSONObject>): RecyclerView.Adapter<W
             else
             {
                 val filterPattern = constraint.toString().toLowerCase().trim { it <= ' ' }
-                for (item in mArrayList)
+                for (item in mArrayListFull)
                 {
                     if (item.getString("country").toLowerCase().startsWith(filterPattern))
                     {

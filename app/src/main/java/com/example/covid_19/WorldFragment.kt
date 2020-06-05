@@ -33,7 +33,6 @@ import org.json.JSONObject
 class WorldFragment() : Fragment()
 {
     var arrayListWorld = arrayListOf<JSONObject>()
-    var searcharrayListWorld = arrayListOf<JSONObject>()
     lateinit var worldList : RecyclerView
     lateinit var refreshLayout5 : SwipeRefreshLayout
     lateinit var searchText : SearchView
@@ -92,32 +91,9 @@ class WorldFragment() : Fragment()
             }
         }
 
-//        searchText.addTextChangedListener(object : TextWatcher
-//        {
-//            override fun afterTextChanged(s: Editable?)
-//            {
-//                if (s.toString() != null)
-//                {
-//                    Handler().postDelayed({filterText(s.toString().toLowerCase().trim())},1000)
-//                }
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int)
-//            {
-//
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-//            {
-//
-//            }
-//        })
-
-
         searchText.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean
             {
-
                 return false
             }
 
@@ -129,42 +105,28 @@ class WorldFragment() : Fragment()
         })
     }
 
-//    private fun filterText(s: String)
-//    {
-//        for (i in 0..arrayListWorld.size-1)
-//        {
-//            if (arrayListWorld.get(i).getString("country").contains(s))
-//            {
-//                searcharrayListWorld.add(arrayListWorld.get(i))
-//            }
-//        }
-//        worldListAdapter.filter(searcharrayListWorld)
-//    }
-
-
     private fun getCurrenData()
     {
         Utils.activity.showLoader()
         AndroidNetworking.get("https://coronavirus-19-api.herokuapp.com/countries")
-            .setPriority(Priority.HIGH)
-            .build()
-            .getAsJSONArray(object : JSONArrayRequestListener {
-                override fun onResponse(response: JSONArray) {
-
-                    arrayListWorld.clear()
-
-                    Utils.activity.hideLoader()
-                    for (i in 0 until response.length())
-                    {
-                        arrayListWorld.add(response.getJSONObject(i))
-                    }
-                    prepareAdapter()
+        .setPriority(Priority.HIGH)
+        .build()
+        .getAsJSONArray(object : JSONArrayRequestListener {
+            override fun onResponse(response: JSONArray)
+            {
+                arrayListWorld.clear()
+                Utils.activity.hideLoader()
+                for (i in 0 until response.length())
+                {
+                    arrayListWorld.add(response.getJSONObject(i))
                 }
+                prepareAdapter()
+            }
 
-                override fun onError(error: ANError) {
-                    Utils.activity.hideLoader()
-                }
-            })
+            override fun onError(error: ANError) {
+                Utils.activity.hideLoader()
+            }
+        })
     }
 
     private fun prepareAdapter()

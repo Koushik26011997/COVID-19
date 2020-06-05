@@ -42,7 +42,6 @@ class AboutFragment() : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         Utils.activity.update.visibility = View.GONE
-        //Utils.activity.findViewById<FrameLayout>(R.id.main_container).setBackgroundColor(Utils.activity.resources.getColor(R.color.white))
         if (!NetworkMonitor(Utils.activity).isConnected)
         {
             Snackbar.make(view, "No Internet Connection!", Snackbar.LENGTH_SHORT)

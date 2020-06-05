@@ -35,6 +35,10 @@ class StatesSubDistWiseListAdapter(
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            holder.header_Recycler_Layout.tooltipText = mArrAyList.getJSONObject(position).getString("district") + " is not in any ZONE"
+        }
         for (i in 0 until Utils.zonesArrayList.size)
         {
             if (Utils.zonesArrayList[i].district.equals(mArrAyList.getJSONObject(position).getString("district"), true))
@@ -65,6 +69,7 @@ class StatesSubDistWiseListAdapter(
                 }
             }
         }
+
         if (mArrAyList.getJSONObject(position).getString("notes") != "")
         {
             holder.distName.text = mArrAyList.getJSONObject(position).getString("district") + "*"
@@ -77,6 +82,7 @@ class StatesSubDistWiseListAdapter(
         {
             holder.distName.text = mArrAyList.getJSONObject(position).getString("district")
         }
+
         holder.distConfirm.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("confirmed").toInt()) + "\n[+" + NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getJSONObject("delta").getString("confirmed").toInt()) +"]"
         holder.distActive.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("active").toInt())
         holder.distRecover.text = NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getString("recovered").toInt()) + "\n[+" + NumberFormat.getInstance().format(mArrAyList.getJSONObject(position).getJSONObject("delta").getString("recovered").toInt()) +"]"

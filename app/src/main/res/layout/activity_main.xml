@@ -10,6 +10,7 @@
         android:id="@+id/loaderLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0.9"
         android:background="#A09F9B"
         android:visibility="gone">
 
@@ -51,7 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:src="@drawable/ic_action_transfer"
+            android:src="@drawable/ic_notifications_active_black_24dp"
             android:tooltipText="Tap to view updates!"
             android:visibility="gone">
 
