@@ -35,25 +35,24 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/lato"
         android:gravity="center"
-        android:text="An Undeclared World War III"
+        android:text="@string/tag_name"
         android:textColor="#000000"
         android:textSize="18sp">
 
     </TextView>
-
     <TextView
         android:id="@+id/slogan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/lato"
         android:gravity="center"
-        android:text="#STAY HOME  #STAY JHAKKAS"
-        android:textColor="#BDB7B7"
-        android:textSize="17sp"
-        android:textStyle="bold">
+        android:text="@string/copy_right"
+        android:textColor="@color/black"
+        android:textSize="17sp">
 
     </TextView>
 
+<!--    android:textColor="#BDB7B7"-->
 </RelativeLayout>

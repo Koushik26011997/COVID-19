@@ -1,6 +1,7 @@
 package com.example.covid_19
 
 import NetworkMonitor
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,21 +10,23 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import android.widget.Toast
+import com.example.covid_19.states_Apis.NewsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
 {
     private var isDoubleBackPressed = true
-    lateinit var update : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         Utils.activity = this
-        update = findViewById(R.id.updates)
+
+        setSupportActionBar(toolbarLayout)
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
 
         bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
         loadFragment(HomeFragment.newInstance())
@@ -31,14 +34,6 @@ class MainActivity : AppCompatActivity()
         if (!NetworkMonitor(this).isConnected)
         {
             showPopup()
-        }
-
-        update.setOnClickListener(){
-            var supportFragment = supportFragmentManager
-            if (!NetworkMonitor(this).isConnected)
-                showPopup()
-            else
-                UpdatesPopUp(this).show(supportFragment, "show")
         }
 
         bottom_nav_view.setOnNavigationItemSelectedListener {
@@ -74,7 +69,6 @@ class MainActivity : AppCompatActivity()
                 R.id.navigation_about -> {
                     isDoubleBackPressed = false
                     if (AboutFragment.newInstance() != null)
-                    //if (WorldFragment.newInstance() != null)
                         loadFragment(AboutFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -85,26 +79,45 @@ class MainActivity : AppCompatActivity()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean
     {
-        menuInflater.inflate(R.menu.bottom_nav_menu, menu)
+        menuInflater.inflate(R.menu.side_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
+        bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = false
+
         var id = item.itemId
         when (id)
         {
             R.id.navigation_updates ->
             {
-                Toast.makeText(applicationContext, "Updates!", Toast.LENGTH_SHORT).show()
+                //showUpdates()
+                startActivity(Intent(this, UpdatesActivity::class.java))
+
+            }
+            R.id.navigation_world ->
+            {
+                startActivity(Intent(this, WorldActivity::class.java))
+            }
+            R.id.navigation_help ->
+            {
+                startActivity(Intent(this, NewsActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun showUpdates() {
+        var supportFragment = supportFragmentManager
+        if (!NetworkMonitor(this).isConnected)
+            showPopup()
+        else
+            UpdatesPopUp(this).show(supportFragment, "show")
+    }
+
     private fun loadFragment(fragment: Fragment)
     {
-        update.visibility = View.VISIBLE
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, fragment)
         transaction.commit()
@@ -149,7 +162,6 @@ class MainActivity : AppCompatActivity()
         bottom_nav_view.menu.findItem(R.id.navigation_home).isChecked = true
         loadFragment(HomeFragment.newInstance())
         Log.i("KP", "onResume")
-
     }
 
     fun showPopup() {
@@ -157,10 +169,5 @@ class MainActivity : AppCompatActivity()
         PopUp(this).also {
             it.show(fm, "confirm")
         }
-    }
-
-    fun showUpdates()
-    {
-        update.visibility = View.VISIBLE
     }
 }

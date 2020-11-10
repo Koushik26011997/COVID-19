@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.androidnetworking.AndroidNetworking
@@ -181,7 +182,7 @@ class DashboardFragment(): Fragment()
                     if ((diffHours > 1) and (differenceMin > 1))
                         text = " (" + diffHours + " hours " + differenceMin + " mins ago)"
 
-                    lastUpdatedime.text = "UPDATED ON: "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayListPie.get(0).lastupdatedtime)) + text
+                    lastUpdatedime.text = "UPDATED ON "+ simpleDateFormat2.format(simpleDateFormat1.parse(arrayListPie.get(0).lastupdatedtime)) + text
 
                     preparePieChart()
                    // prepareConfirmedLineChart()
@@ -197,7 +198,7 @@ class DashboardFragment(): Fragment()
         var pieData = PieData(pieDataSet)
         pieChart.data = pieData
         var description = Description()
-        description.text = "COVID-19 Growth Chart"
+        description.text = "COVID-19 Pie Chart"
         pieChart.description = description
         pieChart.invalidate()
     }

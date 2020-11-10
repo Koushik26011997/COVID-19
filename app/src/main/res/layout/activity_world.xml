@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayout"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3D81E4"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/main_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:title="@string/title_heading"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:titleTextColor="@color/white">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/search_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarLayout"
+        android:background="#FFFFFF"
+        android:elevation="3dp"
+        android:padding="6dp">
+
+        <SearchView
+            android:id="@+id/search_text1"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:inputType="textPersonName|textCapWords"
+            app:queryHint="Search by country name">
+
+        </SearchView>
+
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayoutworld"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/worldList1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_bar_layout"
+            android:nestedScrollingEnabled="false"
+            android:padding="3dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/toolbarLayout"
+        android:id="@+id/loaderLayoutWorld"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9"
+        android:background="#A09F9B"
+        android:visibility="gone">
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_centerInParent="true"
+            app:mk_color="#FFFFFF"
+            app:mk_type="FishSpinner">
+
+        </com.tuyenmonkey.mkloader.MKLoader>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -57,7 +57,7 @@ class HomeFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
-        Utils.activity.showUpdates()
+        //Utils.activity.showUpdates()
         AndroidNetworking.initialize(activity!!.applicationContext)
         AndroidNetworking.setParserFactory(JacksonParserFactory())
 

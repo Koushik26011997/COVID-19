@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#3D81E4"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/main_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:title="@string/title_heading"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:titleTextColor="@color/white">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarLayout"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/loaderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarLayout"
+        android:alpha="0.9"
+        android:background="#A09F9B"
+        android:visibility="gone">
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_centerInParent="true"
+            app:mk_color="#FFFFFF"
+            app:mk_type="FishSpinner">
+
+        </com.tuyenmonkey.mkloader.MKLoader>
+
+    </RelativeLayout>
+
+</RelativeLayout>

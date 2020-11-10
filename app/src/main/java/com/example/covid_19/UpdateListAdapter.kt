@@ -15,7 +15,7 @@ class UpdateListAdapter(arrAyListConfirm : ArrayList<JSONObject>) : RecyclerView
 {
     private var mArrAyList = arrAyListConfirm
     var timeText : Long = 0
-    var simpleDateFormat = SimpleDateFormat("dd MMM, hh:mm a")
+    var simpleDateFormat = SimpleDateFormat("dd MMM EEEE, hh:mm a")
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

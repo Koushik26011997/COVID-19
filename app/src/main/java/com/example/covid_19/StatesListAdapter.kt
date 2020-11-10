@@ -63,8 +63,10 @@ class StatesListAdapter(arrayList: ArrayList<StatewiseItem>): RecyclerView.Adapt
             }
         }
 
-        if (!mArrayList.get(position+1).deltaconfirmed.equals("0"))
+        if (!mArrayList.get(position+1).deltaconfirmed.equals("0") && !mArrayList.get(position+1).deltaconfirmed.startsWith("-"))
+        {
             holder.confirnmedCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).confirmed.toInt()) + "\n[+"+NumberFormat.getInstance().format(mArrayList.get(position+1).deltaconfirmed.toInt())+"]"
+        }
         else
             holder.confirnmedCase.text = NumberFormat.getInstance().format(mArrayList.get(position+1).confirmed.toInt())
 

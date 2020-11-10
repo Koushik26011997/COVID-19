@@ -2,25 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdatesActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3D81E4"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/main_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:title="@string/title_heading"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:titleTextColor="@color/white">
+
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/header_container_confirmation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/toolbarLayout"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:gravity="center"
             android:id="@+id/txt_header_confirmation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
+            android:gravity="center"
             android:padding="10dp"
             android:text="Current Updates!"
             android:textAllCaps="true"
@@ -62,6 +79,7 @@
         android:id="@+id/loaderPopup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/header_container_confirmation"
         android:background="#A09F9B"
         android:visibility="gone">
 
