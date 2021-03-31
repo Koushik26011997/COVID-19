@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.states_Apis.CasesTimeSeriesItem
 import org.json.JSONObject
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -16,6 +17,8 @@ class StatesDateWiseListAdapter(
 ) : RecyclerView.Adapter<StatesDateWiseListAdapter.MyViewHolder>()
 {
     var mArrAyList = arrAyListConfirm
+    var simpleDateFormat = SimpleDateFormat("dd MMMM, yyyy")
+    var simpleDateParse = SimpleDateFormat("yyyy-MM-dd")
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,7 +36,7 @@ class StatesDateWiseListAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
     {
-        holder.date.text = mArrAyList.get(position).date.substring(0,6) + ", 2020"
+        holder.date.text = simpleDateFormat.format(simpleDateParse.parse(mArrAyList.get(position).dateymd))
         holder.confirnmedCase.text = NumberFormat.getInstance().format(mArrAyList.get(position).dailyconfirmed.toInt())
         holder.recoveredCase.text = NumberFormat.getInstance().format(mArrAyList.get(position).dailyrecovered.toInt())
         holder.deceasedCase.text = NumberFormat.getInstance().format(mArrAyList.get(position).dailydeceased.toInt())

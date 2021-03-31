@@ -94,7 +94,10 @@ class MainActivity : AppCompatActivity()
             {
                 //showUpdates()
                 startActivity(Intent(this, UpdatesActivity::class.java))
-
+            }
+            R.id.navigation_vaccine ->
+            {
+                startActivity(Intent(this, VaccineActivity::class.java))
             }
             R.id.navigation_world ->
             {

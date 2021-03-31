@@ -8,6 +8,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/navigation_vaccine"
+        android:title="Vaccine Details"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/navigation_world"
         android:title="@string/title_world"
         app:showAsAction="never" />

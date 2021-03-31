@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NewsActivity"></activity>
+        <activity android:name=".VaccineActivity"></activity>
+        <activity android:name=".NewsActivity" />
         <activity android:name=".UpdatesActivity" />
         <activity android:name=".WorldActivity" />
         <activity

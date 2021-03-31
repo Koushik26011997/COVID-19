@@ -10,7 +10,7 @@
         android:id="@+id/toolbarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3D81E4"
+        android:background="#0C1C46"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/main_container"

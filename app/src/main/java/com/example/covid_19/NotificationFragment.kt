@@ -220,9 +220,9 @@ class NotificationFragment() : Fragment()
     private fun sortdescArrayList()
     {
         arrayList.sortWith(Comparator { o1, o2 -> id
-            var dateFormat = SimpleDateFormat("dd MMMM")
-            var date1 = dateFormat.parse(o1.date)
-            var date2 = dateFormat.parse(o2.date)
+            var dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            var date1 = dateFormat.parse(o1.dateymd)
+            var date2 = dateFormat.parse(o2.dateymd)
             return@Comparator date2.compareTo(date1)
         })
     }
@@ -230,9 +230,9 @@ class NotificationFragment() : Fragment()
     private fun sortascArrayList()
     {
         arrayList.sortWith(Comparator { o1, o2 -> id
-            var dateFormat = SimpleDateFormat("dd MMMM")
-            var date1 = dateFormat.parse(o1.date)
-            var date2 = dateFormat.parse(o2.date)
+            var dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            var date1 = dateFormat.parse(o1.dateymd)
+            var date2 = dateFormat.parse(o2.dateymd)
             return@Comparator date1.compareTo(date2)
         })
     }

@@ -17,11 +17,18 @@ public class ResponseDailyChanges {
     @JsonProperty("statewise")
     List<StatewiseItem> statewise;
 
+    @JsonProperty("tested")
+    List<TestedItem> tested;
+
     public List<CasesTimeSeriesItem> getCasesTimeSeries() {
         return casesTimeSeries;
     }
 
     public List<StatewiseItem> getStatewise() {
         return statewise;
+    }
+
+    public List<TestedItem> getTested() {
+        return tested;
     }
 }

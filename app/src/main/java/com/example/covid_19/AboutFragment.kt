@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.aboutfragment.*
@@ -34,6 +35,9 @@ class AboutFragment() : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         // Utils.activity.update.visibility = View.GONE
+
+        val animation = AnimationUtils.loadAnimation(Utils.activity, R.anim.fade_in)
+        devIcon.startAnimation(animation)
 
         if (!NetworkMonitor(Utils.activity).isConnected)
         {

@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CasesTimeSeriesItem {
     @JsonProperty("date")
      String date;
+    @JsonProperty("dateymd")
+    String dateymd;
     @JsonProperty("dailyrecovered")
      String dailyrecovered;
     @JsonProperty("totalconfirmed")
@@ -42,6 +44,10 @@ public class CasesTimeSeriesItem {
 
     public String getDailydeceased() {
         return dailydeceased;
+    }
+
+    public String getDateymd() {
+        return dateymd;
     }
 
     public String getTotalrecovered() {
